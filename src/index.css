@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 18% 11%;
+    --foreground: 0 0% 95%;
+    --card: 230 16% 14%;
+    --card-foreground: 0 0% 95%;
+    --popover: 230 16% 14%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 250 70% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 230 12% 20%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 230 12% 20%;
+    --muted-foreground: 230 10% 55%;
+    --accent: 250 70% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 230 12% 22%;
+    --input: 230 12% 22%;
+    --ring: 250 70% 65%;
+    --radius: 0.75rem;
+    --sidebar-background: 230 18% 11%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 250 70% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 230 12% 20%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 230 12% 22%;
+    --sidebar-ring: 250 70% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-neutral-900 text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+@layer components {
+  .zo-panel {
+    @apply bg-[#1a1a2e] text-white;
+  }
+  .zo-card {
+    @apply bg-[#22223a] rounded-2xl border border-[#2a2a45];
+  }
+  .zo-input {
+    @apply bg-[#1e1e35] border border-[#2a2a45] rounded-xl text-white placeholder:text-gray-500;
+  }
+  .zo-nav-item {
+    @apply flex flex-col items-center gap-1 text-gray-400 transition-colors;
+  }
+  .zo-nav-item.active {
+    @apply text-white;
+  }
+  .zo-tab {
+    @apply px-4 py-2 rounded-full text-sm text-gray-400 transition-all;
+  }
+  .zo-tab.active {
+    @apply bg-[#2a2a45] text-white;
+  }
+  .zo-btn-icon {
+    @apply w-10 h-10 rounded-xl bg-[#2a2a45] flex items-center justify-center text-gray-300 hover:text-white transition-colors;
+  }
+  .terminal-text {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a3a55;
+  border-radius: 4px;
+}
