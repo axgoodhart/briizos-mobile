@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Eye, Code, Share2, RefreshCw, MoreVertical, Lock, Zap } from 'lucide-react'
 
-export default function SpacePanel() {
+export default function SpaceView() {
   const [viewMode, setViewMode] = useState<'preview' | 'code'>('preview')
 
   return (
@@ -10,7 +10,7 @@ export default function SpacePanel() {
       <div className="flex items-center gap-2 px-4 py-3">
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1e1e35] border border-[#2a2a45]">
           <Zap size={14} className="text-purple-400" />
-          <span className="text-white text-sm">briizos.zo.space</span>
+          <span className="text-white text-sm">briizosspace</span>
         </div>
         <span className="text-gray-500 text-sm">Home page</span>
         <div className="flex-1" />

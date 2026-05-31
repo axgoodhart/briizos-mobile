@@ -10,6 +10,7 @@
     --foreground: 0 0% 95%;
     --card: 230 16% 14%;
     --card-foreground: 0 0% 95%;
+    --tab: linear-gradient(to bottom, rgba(0, 255, 255, 0.195) 50%, transparent 50%),radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%),#1a1a1a;
     --popover: 230 16% 14%;
     --popover-foreground: 0 0% 95%;
     --primary: 250 70% 65%;
@@ -48,7 +49,7 @@
 }
 
 @layer components {
-  .zo-panel {
+  .zo-view {
     @apply bg-[#1a1a2e] text-white;
   }
   .zo-card {
@@ -87,4 +88,34 @@
 ::-webkit-scrollbar-thumb {
   background: #3a3a55;
   border-radius: 4px;
+}
+#historyConversation {
+  cursor: pointer;
+  font-style: italic;
+}
+
+#historyConversation:hover {
+  text-decoration: underline;
+}
+
+#brandMuffin {
+  font-family: Anxler;;
+  color:white;
+  text-shadow: 0 0 2px white;
+    font-size: 24px !important;
+    letter-spacing:0px;
+    margin-bottom:-15px;
+}
+
+#connectionIndicator {
+  filter:saturate(0) brightness(2);padding:0;;
+}
+
+* {font-family: "Anxler Light" !important}
+
+#tabs {
+  background:var(--tab) !important;
+  margin-bottom:-15px;
+  border-radius:10px 10px 0 0 ;
+  padding-bottom:8px;
 }

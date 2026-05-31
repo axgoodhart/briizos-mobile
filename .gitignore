@@ -7,7 +7,22 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# Dependencies
+node_modules/
+
+# Build output and generated reports
+dist/
+build/
+coverage/
+
+# Local environment and tool state
+.env
+.env.*
+!.env.example
+.history/
+.codegraph/
+.vite/
+briizOS.mobile/
 
 # Editor directories and files
 .vscode/*

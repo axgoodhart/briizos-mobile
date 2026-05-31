@@ -18,7 +18,7 @@ const terminalData: Command[] = [
   { prompt: 'recollections', branch: 'master', dir: 'recollections', command: 'nano boost.txt' }
 ]
 
-export default function ChatsPanel() {
+export default function ChatsView() {
   const [activeView, setActiveView] = useState<'chats' | 'terminal'>('terminal')
 
   return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { ChevronDown, Plus, ArrowUp, Sparkles, Globe, Mail, Zap } from 'lucide-react'
+import { ChevronDown, Plus, ArrowUp, Sparkles, Zap } from 'lucide-react'
 
-export default function HomePanel() {
+export default function HomeView() {
   const [inputText, setInputText] = useState('')
   const [selectedModel, setSelectedModel] = useState('GPT-5.4 mini')
   const [showModelMenu, setShowModelMenu] = useState(false)
@@ -35,8 +35,7 @@ export default function HomePanel() {
               <ChevronDown size={14} />
             </button>
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2a2a45] text-sm">
-              <span className="w-2 h-2 rounded-full bg-orange-400" />
-              <span className="text-gray-300">Free</span>
+              <span className="text-gray-300" id="connectionIndicator">API  🔑</span>
             </div>
             <div className="flex-1" />
             <button className="w-8 h-8 rounded-lg bg-[#2a2a45] flex items-center justify-center text-gray-400">
@@ -62,32 +61,33 @@ export default function HomePanel() {
           )}
         </div>
 
-        {/* Rewards */}
+        {/* History */}
         <div className="w-full">
-          <h3 className="text-white font-medium mb-1">Rewards</h3>
-          <p className="text-gray-500 text-sm">Earn $10 / user</p>
+          <h3 className="text-white font-medium mb-1">History</h3>
+          <div className="flex items-stretch gap-6">
+          <p className="text-gray-500 text-sm">Job Search</p>
+          <p className="text-white text-sm" id="historyConversation">update profile landing</p>
+
+          </div>
         </div>
       </div>
 
       {/* Footer links */}
       <div className="px-4 py-4 text-center">
+
         <div className="flex items-center justify-center gap-4 text-gray-500 text-sm mb-1">
-          <span className="flex items-center gap-1"><Globe size={14} /> briizos.zo.computer</span>
-          <span className="flex items-center gap-1"><GridIcon size={14} /> briizos.zo.space</span>
+          <span className="flex items-center gap-1" id="brandMuffin">briizOS</span>
         </div>
-        <span className="flex items-center justify-center gap-1 text-gray-500 text-sm">
-          <Mail size={14} /> briizos@zo.computer
-        </span>
       </div>
     </div>
   )
 }
 
-function GridIcon({ size, className }: { size?: number; className?: string }) {
+/* function GridIcon({ size, className }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" />
       <rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" />
     </svg>
   )
-}
+}*/

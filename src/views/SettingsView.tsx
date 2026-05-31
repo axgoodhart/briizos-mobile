@@ -5,7 +5,7 @@ import {
   Plus
 } from 'lucide-react'
 
-export default function SettingsPanel() {
+export default function SettingsView() {
   const [activeSubTab, setActiveSubTab] = useState<'channels' | 'integrations' | 'ux' | 'advanced' | 'account'>('ux')
 
   const subTabs = [

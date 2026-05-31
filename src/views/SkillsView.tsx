@@ -37,7 +37,7 @@ const skills: Skill[] = [
   }
 ]
 
-export default function SkillsPanel() {
+export default function SkillsView() {
   const [activeTab, setActiveTab] = useState<'installed' | 'hub'>('hub')
 
   return (

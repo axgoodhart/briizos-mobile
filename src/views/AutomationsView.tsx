@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChevronDown, Clock, SlidersHorizontal, Sun, Calendar, ChevronLeft, PenLine, BellOff, Zap, ArrowUp, Sparkles } from 'lucide-react'
 
-export default function AutomationsPanel() {
+export default function AutomationsView() {
   const [schedule, setSchedule] = useState('Daily')
   const [time] = useState('2:00 AM')
   const [automationPrompt, setAutomationPrompt] = useState('')

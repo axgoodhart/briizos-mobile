@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChevronDown, Clock, SlidersHorizontal, Sun, Calendar, ChevronLeft, PenLine, BellOff, Zap, ArrowUp, Sparkles } from 'lucide-react'
 
-export default function AutomationsPanel() {
+export default function AutomationsView() {
   const [schedule, setSchedule] = useState('Daily')
   const [time] = useState('2:00 AM')
   const [automationPrompt, setAutomationPrompt] = useState('')
@@ -137,7 +137,7 @@ const terminalData: Command[] = [
   { prompt: 'recollections', branch: 'master', dir: 'recollections', command: 'nano boost.txt' }
 ]
 
-export default function ChatsPanel() {
+export default function ChatsView() {
   const [activeView, setActiveView] = useState<'chats' | 'terminal'>('terminal')
 
   return (
@@ -231,7 +231,7 @@ const fileData: FileItem[] = [
   { id: '3', name: 'Getting Started', type: 'doc' }
 ]
 
-export default function FilesPanel() {
+export default function FilesView() {
   const [files, setFiles] = useState(fileData)
   const [sortAsc, setSortAsc] = useState(true)
 
@@ -322,7 +322,7 @@ export default function FilesPanel() {
 import { useState } from 'react'
 import { ChevronDown, Plus, ArrowUp, Sparkles, Globe, Mail, Zap } from 'lucide-react'
 
-export default function HomePanel() {
+export default function HomeView() {
   const [inputText, setInputText] = useState('')
   const [selectedModel, setSelectedModel] = useState('GPT-5.4 mini')
   const [showModelMenu, setShowModelMenu] = useState(false)
@@ -383,21 +383,21 @@ export default function HomePanel() {
           )}
         </div>
 
-        {/* Rewards */}
+        {/* History */}
         <div className="w-full">
-          <h3 className="text-white font-medium mb-1">Rewards</h3>
-          <p className="text-gray-500 text-sm">Earn $10 / user</p>
+          <h3 className="text-white font-medium mb-1">History</h3>
+          <p className="text-gray-500 text-sm">Job Search: update profile landing</p>
         </div>
       </div>
 
       {/* Footer links */}
       <div className="px-4 py-4 text-center">
         <div className="flex items-center justify-center gap-4 text-gray-500 text-sm mb-1">
-          <span className="flex items-center gap-1"><Globe size={14} /> briizos.zo.computer</span>
-          <span className="flex items-center gap-1"><GridIcon size={14} /> briizos.zo.space</span>
+          <span className="flex items-center gap-1"><Globe size={14} /> briizoscomputer</span>
+          <span className="flex items-center gap-1"><GridIcon size={14} /> briizosspace</span>
         </div>
         <span className="flex items-center justify-center gap-1 text-gray-500 text-sm">
-          <Mail size={14} /> briizos@zo.computer
+          <Mail size={14} /> briizos.computer
         </span>
       </div>
     </div>
@@ -412,14 +412,14 @@ function GridIcon({ size, className }: { size?: number; className?: string }) {
     </svg>
   )
 }
-import type { PanelId } from '../App'
+import type { ViewId } from '../App'
 import { Home, FolderOpen, MessageCircle, Clock, Grid3X3, Wand2, Settings, ChevronRight } from 'lucide-react'
 
-interface MenuPanelProps {
-  onNavigate: (panel: PanelId) => void
+interface MenuViewProps {
+  onNavigate: (view: ViewId) => void
 }
 
-const menuItems: { id: PanelId; label: string; icon: React.ElementType; subtitle?: string }[] = [
+const menuItems: { id: ViewId; label: string; icon: React.ElementType; subtitle?: string }[] = [
   { id: 'home', label: 'Home', icon: Home, subtitle: 'Chat with Zo' },
   { id: 'files', label: 'Files', icon: FolderOpen, subtitle: 'Manage files' },
   { id: 'chats', label: 'Chats', icon: MessageCircle, subtitle: 'Conversations' },
@@ -428,7 +428,7 @@ const menuItems: { id: PanelId; label: string; icon: React.ElementType; subtitle
   { id: 'skills', label: 'Skills', icon: Wand2, subtitle: 'Installed & Hub' },
 ]
 
-export default function MenuPanel({ onNavigate }: MenuPanelProps) {
+export default function MenuView({ onNavigate }: MenuViewProps) {
   return (
     <div className="h-full flex flex-col bg-[#16162a]">
       <div className="px-4 py-4">
@@ -474,7 +474,7 @@ export default function MenuPanel({ onNavigate }: MenuPanelProps) {
 
       <div className="px-4 py-4 text-center">
         <p className="text-gray-600 text-xs">Zo Computer v1.0</p>
-        <p className="text-gray-700 text-xs">briizos.zo.computer</p>
+        <p className="text-gray-700 text-xs">briizoscomputer</p>
       </div>
     </div>
   )
@@ -486,7 +486,7 @@ import {
   Plus
 } from 'lucide-react'
 
-export default function SettingsPanel() {
+export default function SettingsView() {
   const [activeSubTab, setActiveSubTab] = useState<'channels' | 'integrations' | 'ux' | 'advanced' | 'account'>('ux')
 
   const subTabs = [
@@ -939,7 +939,7 @@ const skills: Skill[] = [
   }
 ]
 
-export default function SkillsPanel() {
+export default function SkillsView() {
   const [activeTab, setActiveTab] = useState<'installed' | 'hub'>('hub')
 
   return (
@@ -998,7 +998,7 @@ export default function SkillsPanel() {
 import { useState } from 'react'
 import { Eye, Code, Share2, RefreshCw, MoreVertical, Lock, Zap } from 'lucide-react'
 
-export default function SpacePanel() {
+export default function SpaceView() {
   const [viewMode, setViewMode] = useState<'preview' | 'code'>('preview')
 
   return (
@@ -1007,7 +1007,7 @@ export default function SpacePanel() {
       <div className="flex items-center gap-2 px-4 py-3">
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1e1e35] border border-[#2a2a45]">
           <Zap size={14} className="text-purple-400" />
-          <span className="text-white text-sm">briizos.zo.space</span>
+          <span className="text-white text-sm">briizosspace</span>
         </div>
         <span className="text-gray-500 text-sm">Home page</span>
         <div className="flex-1" />

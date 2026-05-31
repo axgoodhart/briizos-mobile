@@ -1,15 +1,16 @@
 import { useState } from 'react'
-import AddressBar from './components/AddressBar'
 import BottomNav from './components/BottomNav'
-import HomePanel from './panels/HomePanel'
-import FilesPanel from './panels/FilesPanel'
-import ChatsPanel from './panels/ChatsPanel'
-import AutomationsPanel from './panels/AutomationsPanel'
-import SpacePanel from './panels/SpacePanel'
-import SkillsPanel from './panels/SkillsPanel'
-import MenuPanel from './panels/MenuPanel'
+import SyncStatusStrip from './components/SyncStatusStrip'
+import { useBriizOSSync } from './hooks/useBriizOSSync'
+import HomeView from './views/HomeView'
+import FilesView from './views/FilesView'
+import ChatsView from './views/ChatsView'
+import AutomationsView from './views/AutomationsView'
+import SpaceView from './views/SpaceView'
+import SkillsView from './views/SkillsView'
+import MenuView from './views/MenuView'
 
-export type PanelId = 'home' | 'files' | 'chats' | 'automations' | 'space' | 'skills' | 'menu'
+export type ViewId = 'home' | 'files' | 'chats' | 'automations' | 'space' | 'skills' | 'menu'
 
 export interface TabInfo {
   id: string
@@ -18,14 +19,15 @@ export interface TabInfo {
 }
 
 export default function App() {
-  const [activePanel, setActivePanel] = useState<PanelId>('home')
+  const sync = useBriizOSSync()
+  const [activeView, setActiveView] = useState<ViewId>('home')
   const [tabs, setTabs] = useState<TabInfo[]>([
     { id: 'home', label: 'Home', closable: false }
   ])
 
-  const addPanel = (panelId: PanelId) => {
+  const addView = (viewId: ViewId) => {
     setTabs(prev => {
-      const existing = prev.find(t => t.id === panelId)
+      const existing = prev.find(t => t.id === viewId)
       if (!existing) {
         const labelMap: Record<string, string> = {
           home: 'Home',
@@ -36,65 +38,65 @@ export default function App() {
           skills: 'Skills',
           menu: 'Menu'
         }
-        return [...prev, { id: panelId, label: labelMap[panelId], closable: true }]
+        return [...prev, { id: viewId, label: labelMap[viewId], closable: true }]
       }
       return prev
     })
-    setActivePanel(panelId)
+    setActiveView(viewId)
   }
 
-  const closePanel = (panelId: string) => {
+  const closeView = (viewId: string) => {
     setTabs(prev => {
-      const next = prev.filter(t => t.id !== panelId)
-      if (activePanel === panelId && next.length > 0) {
-        setActivePanel(next[next.length - 1].id as PanelId)
+      const next = prev.filter(t => t.id !== viewId)
+      if (activeView === viewId && next.length > 0) {
+        setActiveView(next[next.length - 1].id as ViewId)
       }
       return next
     })
   }
 
-  const switchPanel = (panelId: PanelId) => {
-    if (panelId === 'menu') {
-      addPanel('menu')
+  const switchView = (viewId: ViewId) => {
+    if (viewId === 'menu') {
+      addView('menu')
     } else {
-      addPanel(panelId)
+      addView(viewId)
     }
   }
 
-  const renderPanel = () => {
-    switch (activePanel) {
-      case 'home': return <HomePanel />
-      case 'files': return <FilesPanel />
-      case 'chats': return <ChatsPanel />
-      case 'automations': return <AutomationsPanel />
-      case 'space': return <SpacePanel />
-      case 'skills': return <SkillsPanel />
-      case 'menu': return <MenuPanel onNavigate={addPanel} />
-      default: return <HomePanel />
+  const renderView = () => {
+    switch (activeView) {
+      case 'home': return <HomeView />
+      case 'files': return <FilesView sync={sync} />
+      case 'chats': return <ChatsView />
+      case 'automations': return <AutomationsView />
+      case 'space': return <SpaceView />
+      case 'skills': return <SkillsView />
+      case 'menu': return <MenuView onNavigate={addView} sync={sync} />
+      default: return <HomeView />
     }
   }
 
   return (
     <div className="min-h-screen bg-neutral-900 flex justify-center items-start">
       <div className="w-full max-w-[430px] h-[100dvh] bg-[#16162a] flex flex-col overflow-hidden relative">
-        <AddressBar domain="briizos.zo.computer" />
         
         {/* Tab bar */}
         <div className="flex items-center gap-1 px-2 py-2 bg-[#16162a] border-b border-[#252540] overflow-x-auto scrollbar-hide">
           {tabs.map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActivePanel(tab.id as PanelId)}
+              onClick={() => setActiveView(tab.id as ViewId)}
+              id = "tabs"
               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-all ${
-                activePanel === tab.id
-                  ? 'bg-[#252540] text-white'
-                  : 'text-gray-500 hover:text-gray-300'
+                activeView === tab.id
+                  ?'opacity-100 border-t border-cyan-500'
+                : ' bg-blend-multiply opacity-65 border-t-0 border-[#252540] hover:opacity-100'
               }`}
             >
-              <span className={activePanel === tab.id ? '' : 'italic'}>{tab.label}</span>
+              <span className={activeView === tab.id ? '' : 'italic'}>{tab.label}</span>
               {tab.closable && (
                 <span
-                  onClick={(e) => { e.stopPropagation(); closePanel(tab.id) }}
+                  onClick={(e) => { e.stopPropagation(); closeView(tab.id) }}
                   className="text-gray-500 hover:text-white ml-1"
                 >×</span>
               )}
@@ -102,13 +104,15 @@ export default function App() {
           ))}
         </div>
 
-        {/* Panel content */}
+        <SyncStatusStrip sync={sync} />
+
+        {/* View content */}
         <div className="flex-1 overflow-y-auto">
-          {renderPanel()}
+          {renderView()}
         </div>
 
         {/* Bottom nav */}
-        <BottomNav active={activePanel} onNavigate={switchPanel} />
+        <BottomNav active={activeView} onNavigate={switchView} />
       </div>
     </div>
   )

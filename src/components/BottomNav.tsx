@@ -1,12 +1,12 @@
 import { FolderOpen, MessageCircle, Clock, Grid3X3, Wand2, Menu, Home } from 'lucide-react'
-import type { PanelId } from '../App'
+import type { ViewId } from '../App'
 
 interface BottomNavProps {
-  active: PanelId
-  onNavigate: (panel: PanelId) => void
+  active: ViewId
+  onNavigate: (view: ViewId) => void
 }
 
-const navItems: { id: PanelId; label: string; icon: React.ElementType }[] = [
+const navItems: { id: ViewId; label: string; icon: React.ElementType }[] = [
   { id: 'home', label: 'Home', icon: Home },
   { id: 'files', label: 'Files', icon: FolderOpen },
   { id: 'chats', label: 'Chats', icon: MessageCircle },
