@@ -67,7 +67,7 @@ export default function App() {
     switch (activeView) {
       case 'home': return <HomeView />
       case 'files': return <FilesView sync={sync} />
-      case 'chats': return <ChatsView />
+      case 'chats': return <ChatsView sync={sync} />
       case 'automations': return <AutomationsView />
       case 'space': return <SpaceView />
       case 'skills': return <SkillsView />

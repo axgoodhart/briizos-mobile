@@ -47,9 +47,17 @@
   - Evidence: `../SyncContract.md`
 
 ## Stage 4 - AI Chat And Tool Registry
-- Port Web's direct client-side API key pattern and chat settings.
-- Rebuild the chat widget as React state, then connect read-only and write tools through confirmation UI.
-- Leave Cloud Function API-key proxying for a later stage.
+- ~~Port Web's direct client-side API key pattern and chat settings.~~
+  - Evidence: `src/services/chatSettings.ts`
+  - Evidence: `src/services/chatApi.ts`
+  - Evidence: `../briizOS.Web/public/modules/chat-module/chat-settings.js`
+  - Evidence: `../briizOS.Web/public/modules/chat-module/chat-api.js`
+- ~~Rebuild the chat widget as React state, then connect read-only and write tools through confirmation UI.~~
+  - Evidence: `src/views/ChatsView.tsx`
+  - Evidence: `src/services/mobileToolRegistry.ts`
+  - Evidence: `src/App.tsx`
+- ~~Leave Cloud Function API-key proxying for a later stage.~~
+  - Evidence: `src/services/chatApi.ts`
 
 ## Stage 5 - Timer, Automations, And Settings
 - Port the timer runtime and app/timer sync.
