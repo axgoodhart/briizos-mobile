@@ -34,38 +34,17 @@
   - Evidence: `src/views/FilesView.tsx`
 
 
-<continuity comment>
-# DELETE THIS CONTINUITY COMMENT AFTER THE NEXT WORK PERFORMED ON THE APP. For context, stage two was just completed. Its final interaction was
-
-Me: I would like to remove the panel nomenclature entirely from this version. We will deal with adding new state tracking parameters to organizer objects later
-7:27 AM
-
-
-
-Worked for 5m 18s
-Codex: Done. I removed the old nomenclature from the mobile-facing version.
-
-What a user experiences now:
-
-The app still keeps the same phone-shell look.
-Files shows only user-facing synced objects: Organizer, Events, Tasks, and Timer.
-Menu data counts no longer expose hidden Web window-state records.
-The sync strip no longer reports hidden backing entries.
-The progression doc no longer describes user-visible “panel” work.
-Code cleanup:
-
-Renamed mobile route components from src/panels/*Panel.tsx to src/views/*View.tsx.
-Renamed app navigation concepts from PanelId / activePanel to ViewId / activeView.
-Renamed internal mobile type names to BriizWindowState for Web compatibility state.
-Updated evidence paths in MOBILE_CORE_OS_PROGRESSION.md.
-The only remaining old collection name is in the hidden sync layer where mobile must read Web’s existing Firebase path. I did not add new organizer state tracking parameters yet. I did not run checks or start a server.
-</continuity comment>
-
-
 ## Stage 3 - Organizer, Notes, And Calendar
-- Replace mock note/file/calendar flows with real create, edit, complete, archive/delete, and schedule actions.
-- Preserve the phone shell while using mobile-first list/detail screens instead of Web's floating desktop windows.
-- Keep Firestore writes on canonical fields from `SyncContract.md`.
+- ~~Replace mock note/file/calendar flows with real create, edit, complete, archive/delete, and schedule actions.~~
+  - Evidence: `src/views/FilesView.tsx`
+  - Evidence: `src/services/mobileSyncService.ts`
+- ~~Preserve the phone shell while using mobile-first list/detail screens instead of Web's floating desktop windows.~~
+  - Evidence: `src/views/FilesView.tsx`
+  - Evidence: `src/App.tsx`
+- ~~Keep Firestore writes on canonical fields from `SyncContract.md`.~~
+  - Evidence: `src/services/syncAdapters.ts`
+  - Evidence: `src/views/FilesView.tsx`
+  - Evidence: `../SyncContract.md`
 
 ## Stage 4 - AI Chat And Tool Registry
 - Port Web's direct client-side API key pattern and chat settings.

@@ -179,11 +179,25 @@ class MobileSyncService {
     await setDoc(doc(db, `users/${uid}/tasks/${task.id}`), taskAdapter.prepareForWrite(task, isNew), { merge: true })
   }
 
+  async deleteTask(taskId: string, options: DestructiveWriteOptions) {
+    requireDestructiveConfirmation(options)
+    const uid = this.requireUid()
+    const db = this.requireDb()
+    await deleteDoc(doc(db, `users/${uid}/tasks/${taskId}`))
+  }
+
   async saveEvent(event: Partial<BriizCalendarEvent> & { id: string }) {
     const uid = this.requireUid()
     const db = this.requireDb()
     const isNew = !this.state.events.some(item => item.id === event.id)
     await setDoc(doc(db, `users/${uid}/events/${event.id}`), calendarAdapter.prepareForWrite(event, isNew), { merge: true })
+  }
+
+  async deleteEvent(eventId: string, options: DestructiveWriteOptions) {
+    requireDestructiveConfirmation(options)
+    const uid = this.requireUid()
+    const db = this.requireDb()
+    await deleteDoc(doc(db, `users/${uid}/events/${eventId}`))
   }
 
   async saveOrganizerItem(item: Partial<BriizOrganizerItem> & { id: string }) {
