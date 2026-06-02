@@ -83,11 +83,13 @@ export interface BriizWindowUi {
   web?: { xywh?: BriizWindowUiBranch }
 }
 
+export type BriizCustomColor = string | Record<string, unknown> | null
+
 export interface BriizWindowState extends BriizBaseDoc {
   title: string
   body: string
   content?: string
-  customColor: string | null
+  customColor: BriizCustomColor
   active: boolean
   isDocked?: boolean
   tags: string[]

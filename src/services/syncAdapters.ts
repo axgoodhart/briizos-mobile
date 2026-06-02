@@ -242,7 +242,7 @@ export const noteAdapter = {
       title: stringValue(data.title),
       body,
       content: body,
-      customColor: data.customColor == null ? null : String(data.customColor),
+      customColor: (data.customColor ?? null) as BriizWindowState['customColor'],
       active: data.active !== false,
       isDocked: data.isDocked !== false,
       tags: stringArray(data.tags),
@@ -273,25 +273,35 @@ export const noteAdapter = {
   prepareForWrite(windowState: Partial<BriizWindowState> & RawDoc, isNew = false): RawDoc {
     const legacy = legacyWindowXywh(windowState)
     const existingUi = isRecord(windowState.ui) ? windowState.ui : {}
-    const payload: RawDoc = withServerStamp({
+    const existingWeb = isRecord(existingUi.web) ? existingUi.web : undefined
+    const existingLocal = isRecord(existingUi.local) ? existingUi.local : undefined
+    const hasFlatXywh = ['x', 'y', 'w', 'h'].some(key => windowState[key] !== undefined)
+    const payload: RawDoc = {
       ...windowState,
       id: stringValue(windowState.id),
       type: stringValue(windowState.type, 'note'),
-      title: stringValue(windowState.title),
-      body: stringValue(windowState.body || windowState.content),
-      customColor: windowState.customColor ?? null,
-      active: windowState.active !== false,
-      tags: stringArray(windowState.tags),
-    }, isNew)
+      updatedAt: serverTimestamp(),
+    }
 
+    if (isNew || windowState.createdAt !== undefined) payload.createdAt = numberValue(windowState.createdAt, Date.now())
+    if (isNew || windowState.title !== undefined) payload.title = stringValue(windowState.title)
+    if (isNew || windowState.body !== undefined || windowState.content !== undefined) {
+      payload.body = stringValue(windowState.body ?? windowState.content)
+    }
+    if (isNew || windowState.customColor !== undefined) payload.customColor = windowState.customColor ?? null
+    if (isNew || windowState.active !== undefined) payload.active = windowState.active !== false
+    if (isNew || windowState.tags !== undefined) payload.tags = stringArray(windowState.tags)
+
+    delete payload.ui
     if (isNew) {
       payload.ui = {
-        ...existingUi,
-        local: isRecord(existingUi.local) ? existingUi.local : { xywh: legacy },
-        web: isRecord(existingUi.web) ? existingUi.web : { xywh: legacy },
+        local: existingLocal ?? { xywh: legacy },
+        web: existingWeb ?? { xywh: legacy },
       }
-    } else if (windowState.ui) {
-      payload.ui = existingUi
+    } else if (hasFlatXywh || existingWeb) {
+      payload.ui = {
+        web: hasFlatXywh ? { ...(existingWeb ?? {}), xywh: legacy } : existingWeb,
+      }
     }
 
     delete payload.content
@@ -299,7 +309,14 @@ export const noteAdapter = {
     delete payload.y
     delete payload.w
     delete payload.h
-    requireFields(payload, ['id', 'type', 'title', 'body', 'customColor', 'createdAt'], 'noteAdapter')
+    Object.keys(payload).forEach(key => {
+      if (payload[key] === undefined) delete payload[key]
+    })
+    if (isNew) {
+      requireFields(payload, ['id', 'type', 'title', 'body', 'createdAt'], 'noteAdapter')
+    } else {
+      requireFields(payload, ['id'], 'noteAdapter')
+    }
     return payload
   },
 }
