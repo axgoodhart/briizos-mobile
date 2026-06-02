@@ -11,6 +11,7 @@ import {
   type Unsubscribe,
 } from 'firebase/firestore'
 import { ensureFirebaseAuthPersistence, getBriizFirebase } from './firebaseClient'
+import { prepareBriizSyncWrite, type SyncWriteOp } from './briizSyncCore'
 import { calendarAdapter, noteAdapter, organizerAdapter, taskAdapter } from './syncAdapters'
 import type {
   BriizCalendarEvent,
@@ -160,9 +161,17 @@ class MobileSyncService {
 
   async saveWindowState(windowState: Partial<BriizWindowState> & { id: string }) {
     const uid = this.requireUid()
-    const db = this.requireDb()
-    const isNew = !this.state.windowStates.some(item => item.id === windowState.id)
-    await setDoc(doc(db, `users/${uid}/panels/${windowState.id}`), noteAdapter.prepareForWrite(windowState, isNew), { merge: true })
+    if (!windowState.orgId) throw new Error('Panel window state writes require an organizer orgId.')
+    await this.applySyncOps(prepareBriizSyncWrite({
+      uid,
+      entity: 'panel',
+      action: 'update',
+      platform: 'mobile',
+      itemId: windowState.orgId,
+      panelId: windowState.id,
+      data: windowState,
+      serverTimestamp,
+    }))
   }
 
   async deleteWindowState(windowStateId: string, options: DestructiveWriteOptions) {
@@ -202,14 +211,32 @@ class MobileSyncService {
 
   async saveOrganizerItem(item: Partial<BriizOrganizerItem> & { id: string }) {
     const uid = this.requireUid()
-    const db = this.requireDb()
     const isNew = !this.state.organizer.some(existing => existing.id === item.id)
-    await setDoc(doc(db, `users/${uid}/organizer/${item.id}`), organizerAdapter.prepareForWrite(item, isNew), { merge: true })
+    await this.applySyncOps(prepareBriizSyncWrite({
+      uid,
+      entity: 'organizer',
+      action: isNew ? 'create' : 'update',
+      itemId: item.id,
+      data: item,
+      serverTimestamp,
+    }))
   }
 
   async deleteOrganizerItem(itemId: string, options: DestructiveWriteOptions) {
     requireDestructiveConfirmation(options)
     const uid = this.requireUid()
+    const item = this.state.organizer.find(existing => existing.id === itemId)
+    if (item?.type === 'note') {
+      const panelId = (item as BriizOrganizerItem & { panelId?: string | null }).panelId || item.windowStateId || undefined
+      await this.applySyncOps(prepareBriizSyncWrite({
+        uid,
+        entity: 'note',
+        action: 'delete',
+        itemId,
+        panelId,
+      }))
+      return
+    }
     const db = this.requireDb()
     await deleteDoc(doc(db, `users/${uid}/organizer/${itemId}`))
   }
@@ -237,6 +264,17 @@ class MobileSyncService {
     this.bindCollection('events', 'events', (id, data) => calendarAdapter.normalizeOnRead(id, data))
     this.bindCollection('organizer', 'organizer', (id, data) => organizerAdapter.normalizeOnRead(id, data))
     this.bindAppDocs(uid)
+  }
+
+  private async applySyncOps(ops: SyncWriteOp[]) {
+    const db = this.requireDb()
+    for (const op of ops) {
+      if (op.kind === 'delete') {
+        await deleteDoc(doc(db, op.path))
+      } else {
+        await setDoc(doc(db, op.path), op.data, op.options)
+      }
+    }
   }
 
   private bindCollection(

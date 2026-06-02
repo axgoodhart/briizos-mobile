@@ -38,7 +38,7 @@ function summarizeSync(sync: BriizOSMobileState) {
     .filter(event => event.scheduledDate)
     .sort((a, b) => a.scheduledDate.localeCompare(b.scheduledDate))
     .slice(0, 8)
-  const notes = sync.organizer.filter(item => item.type !== 'event').slice(0, 8)
+  const notes = sync.organizer.filter(item => item.type === 'note').slice(0, 8)
 
   return `
 # Current briizOS Mobile Context
@@ -49,7 +49,7 @@ Sync: ${sync.status}${sync.email ? ` as ${sync.email}` : ''}
 Organizer items: ${sync.organizer.length}
 Tasks: ${sync.tasks.length} (${incompleteTasks.length} incomplete)
 Events: ${sync.events.length}
-Notes backing records: ${sync.windowStates.filter(item => item.type === 'note').length}
+Organizer notes: ${notes.length}
 
 Upcoming events:
 ${upcomingEvents.length ? upcomingEvents.map(event => `- ${event.scheduledDate}: ${event.title}`).join('\n') : '- none'}

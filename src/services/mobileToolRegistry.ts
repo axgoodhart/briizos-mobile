@@ -31,7 +31,7 @@ const TOOL_DEFINITIONS: MobileToolDefinition[] = [
   },
   {
     name: 'searchNotes',
-    description: 'Search synced organizer notes and note records.',
+    description: 'Search synced organizer notes.',
     requiresConfirmation: false,
     parameters: {
       query: { type: 'string', description: 'Search term. Use an empty string to list recent notes.' },
@@ -184,7 +184,7 @@ function collectEvents(sync: BriizOSMobileState): (BriizCalendarEvent | BriizOrg
 
 function collectNotes(sync: BriizOSMobileState) {
   const organizerNotes = sync.organizer
-    .filter(item => item.type !== 'event')
+    .filter(item => item.type === 'note')
     .map(item => ({
       id: item.id,
       title: item.title || item.name || 'Untitled note',
@@ -193,17 +193,7 @@ function collectNotes(sync: BriizOSMobileState) {
       source: 'organizer',
     }))
 
-  const noteRecords = sync.windowStates
-    .filter(item => item.type === 'note')
-    .map(item => ({
-      id: item.id,
-      title: item.title || 'Untitled note',
-      body: item.body || item.content || '',
-      tags: item.tags || [],
-      source: 'notes',
-    }))
-
-  return [...organizerNotes, ...noteRecords]
+  return organizerNotes
 }
 
 function parseTimeString(value: string | null): number | null {
