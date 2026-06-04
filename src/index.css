@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
+@font-face {
+  font-family: "Chillax";
+  src: local("RubikScribble-Regular"),
+    url('./assets/fonts/Rubik_Scribble/RubikScribble-Regular.ttf')
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 230 18% 11%;
+    --background: 0 0% 100%;
     --foreground: 0 0% 95%;
-    --card: 230 16% 14%;
     --card-foreground: 0 0% 95%;
     --tab: linear-gradient(to bottom, rgba(0, 255, 255, 0.195) 50%, transparent 50%),radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%),#1a1a1a;
     --popover: 230 16% 14%;
@@ -118,4 +124,23 @@
   margin-bottom:-15px;
   border-radius:10px 10px 0 0 ;
   padding-bottom:8px;
+}
+
+#tabbar {
+  overflow-y:hidden;
+}
+
+#tabbar::-webkit-scrollbar {
+ height:3px;}
+#tabbar::-webkit-scrollbar-thumb {
+  background: rgb(5,5,5);border-top:.5px solid gray;
+  box-shadow: 0 4px 3020px gold;
+}
+
+[style-id="stylo-289"] {
+  background:linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+  backdrop-filter:blur(3px);
+/*  min-height:min-content !important;
+  max-height: min-content !important;*/
+  border-radius: 4px;
 }

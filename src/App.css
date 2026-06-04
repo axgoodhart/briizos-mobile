@@ -3,6 +3,8 @@
   text-align: center;
 }
 
+html {background:black;}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -42,4 +44,9 @@
 #historyConversation {
   cursor:pointer;
   font-style: italic;
+}
+
+#stylo-9, #stylo-9, #stylo-10, #root>div>div {
+  background-image:url(assets/wallpaper/2003.png);
+/*  background:linear-gradient(darkslateblue, black) !important;*/
 }
