@@ -31,6 +31,16 @@
   text-align: left;
 }
 
+/* Journals are device-local, so the global cloud-sync strip is redundant
+   here. Reclaim that row for the page while leaving the app tab bar intact. */
+#tabbar:has(~ * > .mobile-journals) + .row-4 {
+  display: none;
+}
+
+#tabbar:has(~ * > .mobile-journals) ~ *:has(> .mobile-journals) {
+  overflow: hidden;
+}
+
 .mobile-journals,
 .mobile-journals * {
   box-sizing: border-box;
@@ -934,7 +944,7 @@
   grid-template-columns: 44px 1fr 44px;
   align-items: center;
   gap: 10px;
-  padding: max(10px, env(safe-area-inset-top)) 12px 8px;
+  padding: max(8px, env(safe-area-inset-top)) 8px 0;
 }
 
 .journal-reader__identity {
@@ -970,8 +980,8 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 5px 12px 0;
+  gap: 0;
+  padding: 0 4px;
 }
 
 .journal-paper {
@@ -1108,6 +1118,15 @@
   scrollbar-width: thin;
 }
 
+/* A notes page gets a quiet writing boundary without shrinking the page.
+   The inset follows the mockup while the paper itself stays edge-to-edge. */
+.journal-paper__content:has(.journal-notes-editor) {
+  margin: 0 16px;
+  padding: 5px 4px 12px;
+  border: 1.5px solid oklch(76% 0.105 67 / 0.55);
+  border-radius: 12px;
+}
+
 .journal-paper__footer {
   flex: none;
   display: grid;
@@ -1167,44 +1186,62 @@
 }
 
 .journal-page-rail {
+  position: relative;
   flex: none;
   display: grid;
-  grid-template-columns: 1fr 46px;
+  grid-template-columns: 1fr 44px;
   align-items: stretch;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
+  height: 44px;
   max-width: 540px;
   align-self: center;
 }
 
 .journal-page-rail__scroll {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   overflow-x: auto;
-  padding: 1px;
+  padding: 0;
   scroll-snap-type: x proximity;
   scrollbar-width: none;
 }
 
 .journal-page-rail__scroll button {
+  position: relative;
+  isolation: isolate;
   min-width: 104px;
-  height: 46px;
+  height: 44px;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 7px;
   padding: 0 10px;
-  border: 1px solid oklch(75% 0.045 76 / 0.22);
-  border-radius: 8px;
+  border: 0;
+  border-radius: 12px;
   color: oklch(74% 0.03 72);
-  background: oklch(19% 0.022 59 / 0.78);
+  background: transparent;
   text-align: left;
   scroll-snap-align: start;
 }
 
+.journal-page-rail__scroll button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 10px 0;
+  border: 1px solid oklch(75% 0.045 76 / 0.22);
+  border-radius: 999px;
+  background: oklch(19% 0.022 59 / 0.78);
+}
+
 .journal-page-rail__scroll button.is-active {
-  border-color: var(--journal-brass-soft);
   color: var(--journal-night);
+  background: transparent;
+}
+
+.journal-page-rail__scroll button.is-active::before {
+  border-color: var(--journal-brass-soft);
   background: var(--journal-brass-soft);
 }
 
@@ -1224,31 +1261,62 @@
 }
 
 .journal-page-rail__add {
-  width: 46px;
-  height: 46px;
+  position: relative;
+  isolation: isolate;
+  width: 44px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid oklch(75% 0.045 76 / 0.32);
-  border-radius: 50%;
-  color: var(--journal-brass-soft);
-  background: oklch(19% 0.022 59 / 0.82);
+  border: 0;
+  border-radius: 12px;
+  color: oklch(91% 0.025 280);
+  background: transparent;
+}
+
+.journal-page-rail__add::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 9px 0;
+  border: 1px solid oklch(72% 0.09 285 / 0.45);
+  border-radius: 999px;
+  background: oklch(46% 0.11 285);
 }
 
 .journal-reader__save-state {
-  flex: none;
-  min-height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding-bottom: max(3px, env(safe-area-inset-bottom));
-  color: oklch(65% 0.025 69);
-  font-size: 0.58rem;
-  letter-spacing: 0.05em;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.journal-reader__save-state.is-error { color: oklch(75% 0.11 30); }
+.journal-reader__save-state.is-error {
+  z-index: 20;
+  left: 50%;
+  bottom: 50px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 8px 11px;
+  clip: auto;
+  border: 1px solid oklch(75% 0.11 30 / 0.45);
+  border-radius: 999px;
+  color: oklch(90% 0.04 32);
+  background: oklch(25% 0.07 28 / 0.95);
+  box-shadow: 0 8px 24px oklch(6% 0.02 28 / 0.4);
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  transform: translateX(-50%);
+}
 
 /* Folio editors */
 .journal-notes-editor {
@@ -1582,7 +1650,7 @@
   .journals-library__scroll { padding-inline: 28px; }
   .journals-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .journal-cover__title { font-size: 1rem; }
-  .journal-reader__stage { padding-inline: 22px; }
+  .journal-reader__stage { padding-inline: 10px; }
   .journal-sheet { max-width: 560px; }
 }
 
@@ -1595,6 +1663,14 @@
   .journal-icon-button:hover,
   .journal-page-rail__add:hover {
     color: var(--journal-night);
+  }
+
+  .journal-icon-button:hover {
+    background: var(--journal-brass-soft);
+  }
+
+  .journal-page-rail__add:hover::before {
+    border-color: var(--journal-brass-soft);
     background: var(--journal-brass-soft);
   }
 
@@ -1617,8 +1693,7 @@
 
 @media (max-height: 670px) {
   .journal-reader__header { padding-top: 7px; }
-  .journal-reader__stage { gap: 7px; }
-  .journal-reader__save-state { display: none; }
+  .journal-reader__stage { gap: 0; }
   .journal-paper__header { padding-top: 9px; }
   .journal-paper__title { padding-top: 8px; }
   .journal-paper__footer { padding-bottom: 8px; }

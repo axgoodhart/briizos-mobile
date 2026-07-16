@@ -834,7 +834,11 @@ function JournalReader({
         </div>
       </div>
 
-      <footer className={`journal-reader__save-state${storageState === 'error' ? ' is-error' : ''}`}>
+      <footer
+        className={`journal-reader__save-state${storageState === 'error' ? ' is-error' : ''}`}
+        role="status"
+        aria-live="polite"
+      >
         <LockKeyhole size={13} aria-hidden="true" />
         {storageState === 'saved' ? 'Saved on this device' : 'Could not save on this device'}
       </footer>
