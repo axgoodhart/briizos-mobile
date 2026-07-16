@@ -1,0 +1,39 @@
+.row-3.mobile-bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 1px;
+}
+
+.mobile-bottom-nav .mobile-bottom-nav__item {
+  min-width: 0;
+  min-height: 48px;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 1px;
+  border-radius: 10px;
+}
+
+.mobile-bottom-nav__item svg {
+  flex: none;
+}
+
+.mobile-bottom-nav .mobile-bottom-nav__label {
+  width: 100%;
+  overflow: hidden;
+  color: currentColor;
+  font-size: clamp(0.48rem, 2.2vw, 0.62rem);
+  line-height: 0.78rem;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 370px) {
+  .mobile-bottom-nav .mobile-bottom-nav__item {
+    padding-inline: 0;
+  }
+
+  .mobile-bottom-nav .mobile-bottom-nav__label {
+    font-size: 0.46rem;
+  }
+}

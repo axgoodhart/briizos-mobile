@@ -1,6 +1,6 @@
 import type { ElementType } from 'react';
 import type { ViewId } from '../App';
-import { Home, FolderOpen, MessageCircle, Clock, Grid3X3, Wand2, Settings, ChevronRight, Database } from 'lucide-react';
+import { Home, FolderOpen, MessageCircle, Clock, Grid3X3, Wand2, Settings, ChevronRight, Database, BookOpenText } from 'lucide-react';
 import AccountControls from '../components/AccountControls';
 import type { BriizOSMobileState } from '../types/briizos';
 
@@ -15,6 +15,7 @@ export default function MenuView({ onNavigate, sync }: MenuViewProps) {
   const syncedRecordCount = sync.organizer.length + sync.events.length + sync.tasks.length + (sync.timer ? 1 : 0);
   const menuItems: {id: ViewId;label: string;icon: ElementType;subtitle?: string;}[] = [
   { id: 'home', label: 'Home', icon: Home, subtitle: sync.status === 'ready' ? 'Live with Web data' : 'Chat with Zo' },
+  { id: 'journals', label: 'Journals', icon: BookOpenText, subtitle: 'Your private shelf' },
   { id: 'files', label: 'Files', icon: FolderOpen, subtitle: `${syncedRecordCount} synced records` },
   { id: 'chats', label: 'Chats', icon: MessageCircle, subtitle: `${chatCount} chat records` },
   { id: 'automations', label: 'Automations', icon: Clock, subtitle: `${sync.tasks.length} tasks / ${sync.events.length} events` },

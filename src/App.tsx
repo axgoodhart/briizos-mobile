@@ -9,8 +9,9 @@ import AutomationsView from './views/AutomationsView';
 import SpaceView from './views/SpaceView';
 import SkillsView from './views/SkillsView';
 import MenuView from './views/MenuView';
+import JournalsView from './views/JournalsView';
 
-export type ViewId = 'home' | 'files' | 'chats' | 'automations' | 'space' | 'skills' | 'menu';
+export type ViewId = 'home' | 'journals' | 'files' | 'chats' | 'automations' | 'space' | 'skills' | 'menu';
 
 export interface TabInfo {
   id: string;
@@ -31,6 +32,7 @@ export default function App() {
       if (!existing) {
         const labelMap: Record<string, string> = {
           home: 'Home',
+          journals: 'Journals',
           files: 'Files',
           chats: 'Chats',
           automations: 'Automations',
@@ -66,6 +68,7 @@ export default function App() {
   const renderView = () => {
     switch (activeView) {
       case 'home':return <HomeView style-id="stylo-0" />;
+      case 'journals':return <JournalsView />;
       case 'files':return <FilesView style-id="stylo-1" sync={sync} />;
       case 'chats':return <ChatsView style-id="stylo-2" sync={sync} />;
       case 'automations':return <AutomationsView style-id="stylo-3" />;
