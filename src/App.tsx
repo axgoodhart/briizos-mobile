@@ -45,16 +45,7 @@ export default function App() {
       return prev;
     });
     setActiveView(viewId);
-  };
-
-  const closeView = (viewId: string) => {
-    setTabs((prev) => {
-      const next = prev.filter((t) => t.id !== viewId);
-      if (activeView === viewId && next.length > 0) {
-        setActiveView(next[next.length - 1].id as ViewId);
-      }
-      return next;
-    });
+  
   };
 
   const switchView = (viewId: ViewId) => {
@@ -67,55 +58,35 @@ export default function App() {
 
   const renderView = () => {
     switch (activeView) {
-      case 'home':return <HomeView style-id="stylo-0" />;
+      case 'home':return <HomeView />;
       case 'journals':return <JournalsView />;
-      case 'files':return <FilesView style-id="stylo-1" sync={sync} />;
-      case 'chats':return <ChatsView style-id="stylo-2" sync={sync} />;
-      case 'automations':return <AutomationsView style-id="stylo-3" />;
-      case 'space':return <SpaceView style-id="stylo-4" />;
-      case 'skills':return <SkillsView style-id="stylo-5" />;
-      case 'menu':return <MenuView style-id="stylo-6" onNavigate={addView} sync={sync} />;
-      default:return <HomeView style-id="stylo-7" />;
+      case 'files':return <FilesView sync={sync} />;
+      case 'chats':return <ChatsView sync={sync} />;
+      case 'automations':return <AutomationsView />;
+      case 'space':return <SpaceView />;
+      case 'skills':return <SkillsView />;
+      case 'menu':return <MenuView onNavigate={addView} sync={sync} />;
+      default:return <HomeView />;
     }
   };
 
   return (
-    <div style-id="stylo-8" className="min-h-screen bg-black flex justify-center items-start">
-      <div style-id="stylo-9" className="w-full max-w-[430px] h-[100dvh] bg-[#011605] flex flex-col overflow-hidden relative">
+    <div className="row">
+      <div className="stack">
         
         {/* Tab bar */}
-        <div style-id="stylo-10" id="tabbar" className="flex items-center gap-1 px-2 py-2 bg-[#000] border-b border-[#252540] overflow-x-auto scrollbar-hide">
-          {tabs.map((tab) =>
-          <button style-id="stylo-11"
-          key={tab.id}
-          onClick={() => setActiveView(tab.id as ViewId)}
-          id="tabs"
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-all ${
-          activeView === tab.id ?
-          'opacity-100 border-t border-cyan-500' :
-          ' bg-blend-multiply opacity-65 border-t-0 border-[#252540] hover:opacity-100'}`
-          }>
-            
-              <span style-id="stylo-12" className={activeView === tab.id ? '' : 'italic'}>{tab.label}</span>
-              {tab.closable &&
-            <span style-id="stylo-13"
-            onClick={(e) => {e.stopPropagation();closeView(tab.id);}}
-            className="text-gray-500 hover:text-white ml-1">
-              ×</span>
-            }
-            </button>
-          )}
-        </div>
 
-        <SyncStatusStrip style-id="stylo-14" sync={sync} />
 
         {/* View content */}
-        <div style-id="stylo-15" className="flex-1 overflow-y-auto">
+        <div className="scroll">
           {renderView()}
         </div>
 
         {/* Bottom nav */}
-        <BottomNav style-id="stylo-16" active={activeView} onNavigate={switchView} />
+        <SyncStatusStrip sync={sync} />
+
+        <BottomNav active={activeView} onNavigate={switchView} />
+
       </div>
     </div>);
 

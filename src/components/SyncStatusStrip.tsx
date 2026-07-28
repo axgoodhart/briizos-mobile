@@ -31,14 +31,17 @@ export default function SyncStatusStrip({ sync }: SyncStatusStripProps) {
   join(' / ');
 
   return (
-    <div style-id="stylo-43" className="flex items-center gap-2 px-3 py-1.5 bg-[#121222] border-b border-[#252540] text-[11px] text-gray-400">
-      <Icon style-id="stylo-44"
-      size={13}
-      className={sync.status === 'syncing' || sync.status === 'authenticating' ? 'animate-spin text-cyan-300' : 'text-cyan-300'} />
+    <div className="row-4">
+      <span className="row-18" id="brandMuffin">briizOS</span>
+
+      <Icon
+        size={13}
+        className={sync.status === 'syncing' || sync.status === 'authenticating' ? 'animate-spin text-cyan-300' : 'text-cyan-300'} />
       
-      <span style-id="stylo-45" className="text-gray-200">{labelMap[sync.status]}</span>
-      <span style-id="stylo-46" className="h-3 w-px bg-[#2a2a45]" />
-      <span style-id="stylo-47" className="truncate">{sync.error || counts}</span>
+      <span className="span-tone-2">{labelMap[sync.status]}</span>
+      <span className="span-tone-3" />
+      <span className="span-styled">{sync.error || counts}</span>
+
     </div>);
 
 }

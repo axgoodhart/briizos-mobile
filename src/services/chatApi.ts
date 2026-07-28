@@ -96,7 +96,7 @@ function buildSystemPrompt(settings: ChatSettingsState, sync: BriizOSMobileState
   const tools = settings.enableTools ? `\n\n${toolPrompt()}` : ''
   const custom = customPrompt ? `\n\n# Alex's Chat Instructions\n\n${customPrompt}` : ''
 
-  return `You are Zo, the briizOS mobile assistant. Be concise, direct, and useful. Keep mobile responses short unless Alex asks for detail.${tools}${custom}\n\n${summarizeSync(sync)}`
+  return `You arebriizOS, the briizOS mobile assistant. Be concise, direct, and useful. Keep mobile responses short unless Alex asks for detail.${tools}${custom}\n\n${summarizeSync(sync)}`
 }
 
 function validToolNames() {

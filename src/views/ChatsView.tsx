@@ -102,7 +102,7 @@ export default function ChatsView({ sync }: ChatsViewProps) {
   const [busyToolId, setBusyToolId] = useState<string | null>(null);
   const [pendingTools, setPendingTools] = useState<MobileToolCall[]>([]);
   const [messages, setMessages] = useState<UiMessage[]>([
-  makeMessage('assistant', 'Chat is ready. Add a provider key in Settings, then ask Zo to read your schedule, search notes, or queue changes for confirmation.', {
+  makeMessage('assistant', 'Chat is ready. Add a provider key in Settings, then askbriizOSto read your schedule, search notes, or queue changes for confirmation.', {
     meta: 'Zo'
   })]
   );
@@ -243,19 +243,19 @@ export default function ChatsView({ sync }: ChatsViewProps) {
 
 
   return (
-    <div style-id="stylo-100" className="h-full flex flex-col bg-[#000]">
-      <div style-id="stylo-101" className="flex items-center gap-2 px-4 py-2 border-b border-[#252540]">
+    <div className="stack-3">
+      <div className="row-9">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (
-            <button style-id="stylo-102"
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm transition-all ${
-            activeTab === tab.id ? 'bg-[#252540] text-white' : 'text-gray-500'}`
-            }>
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`row-small-3 ${
+              activeTab === tab.id ? 'bg-[#252540] text-white' : 'text-gray-500'}`
+              }>
               
-              <Icon style-id="stylo-103" size={14} />
+              <Icon size={14} />
               {tab.label}
             </button>);
 
@@ -263,14 +263,14 @@ export default function ChatsView({ sync }: ChatsViewProps) {
       </div>
 
       {activeTab === 'chat' &&
-      <div style-id="stylo-104" className="flex min-h-0 flex-1 flex-col">
-          <div style-id="stylo-105" className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+      <div className="stack-4">
+          <div className="scroll-3">
             {messages.map((message) =>
-          <div style-id="stylo-106"
-          key={message.id}
-          className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+          <div
+            key={message.id}
+            className={`row-10 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             
-                <div style-id="stylo-107" className={`max-w-[88%] rounded-2xl border px-3 py-2 ${
+                <div className={`div-spacing-2 ${
             message.role === 'user' ?
             'border-cyan-400/20 bg-cyan-400/10 text-white' :
             message.error ?
@@ -279,71 +279,71 @@ export default function ChatsView({ sync }: ChatsViewProps) {
             'border-emerald-400/20 bg-emerald-400/10 text-emerald-50' :
             'border-[#2a2a45] bg-[#1e1e35] text-gray-100'}`
             }>
-                  {message.meta && <p style-id="stylo-108" className="mb-1 text-[10px] uppercase tracking-wide text-gray-500">{message.meta}</p>}
-                  <p style-id="stylo-109" className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
+                  {message.meta && <p className="caps">{message.meta}</p>}
+                  <p className="small-8">{message.content}</p>
                 </div>
               </div>
           )}
             {isSending &&
-          <div style-id="stylo-110" className="flex items-center gap-2 text-gray-500 text-sm">
-                <Loader2 style-id="stylo-111" size={15} className="animate-spin" />
+          <div className="row-small-4">
+                <Loader2 size={15} className="loader2-styled" />
                 Waiting for {providerLabel(settings.provider)}
               </div>
           }
           </div>
 
           {pendingTools.length > 0 &&
-        <div style-id="stylo-112" className="border-t border-[#252540] px-4 py-3 space-y-2">
+        <div className="div-spacing-3">
               {pendingTools.map((call) =>
-          <div style-id="stylo-113" key={call.id} className="rounded-xl border border-amber-400/25 bg-amber-400/10 p-3">
-                  <div style-id="stylo-114" className="mb-2 flex items-center gap-2 text-sm text-amber-100">
-                    <ShieldCheck style-id="stylo-115" size={15} />
-                    <span style-id="stylo-116" className="flex-1">{formatToolCall(call)}</span>
+          <div key={call.id} className="card-6">
+                  <div className="row-small-5">
+                    <ShieldCheck size={15} />
+                    <span className="div-styled-2">{formatToolCall(call)}</span>
                   </div>
-                  <div style-id="stylo-117" className="flex items-center gap-2">
-                    <button style-id="stylo-118"
-              onClick={() => void confirmTool(call)}
-              disabled={busyToolId === call.id || !sync.uid}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-500/20 px-3 py-2 text-sm text-emerald-100 disabled:opacity-45">
+                  <div className="row-6">
+                    <button
+                onClick={() => void confirmTool(call)}
+                disabled={busyToolId === call.id || !sync.uid}
+                className="card-row-center-small-2">
                 
-                      {busyToolId === call.id ? <Loader2 style-id="stylo-119" size={14} className="animate-spin" /> : <Check style-id="stylo-120" size={14} />}
+                      {busyToolId === call.id ? <Loader2 size={14} className="loader2-styled" /> : <Check size={14} />}
                       Confirm
                     </button>
-                    <button style-id="stylo-121"
-              onClick={() => cancelTool(call)}
-              disabled={busyToolId === call.id}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-red-500/15 px-3 py-2 text-sm text-red-100 disabled:opacity-45">
+                    <button
+                onClick={() => cancelTool(call)}
+                disabled={busyToolId === call.id}
+                className="card-row-center-small-3">
                 
-                      <X style-id="stylo-122" size={14} />
+                      <X size={14} />
                       Cancel
                     </button>
                   </div>
-                  {!sync.uid && <p style-id="stylo-123" className="mt-2 text-xs text-amber-200/70">Sign in from Menu before confirming writes.</p>}
+                  {!sync.uid && <p className="small-9">Sign in from Menu before confirming writes.</p>}
                 </div>
           )}
             </div>
         }
 
-          <form style-id="stylo-124" onSubmit={handleSubmit} className="border-t border-[#252540] px-4 py-3">
-            <div style-id="stylo-125" className="rounded-2xl border border-[#2a2a45] bg-[#1e1e35] p-3">
-              <textarea style-id="stylo-126"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            placeholder="Ask Zo..."
-            className="min-h-[64px] w-full resize-none bg-transparent text-sm text-white outline-none placeholder:text-gray-500" />
+          <form onSubmit={handleSubmit} className="form-spacing">
+            <div className="card-7">
+              <textarea
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="AskbriizOS..."
+              className="small-10" />
             
-              <div style-id="stylo-127" className="mt-2 flex items-center gap-2">
-                <div style-id="stylo-128" className="flex items-center gap-1.5 rounded-full bg-[#2a2a45] px-2.5 py-1 text-xs text-gray-300">
-                  <Bot style-id="stylo-129" size={13} />
+              <div className="row-8">
+                <div className="card-row-small-5">
+                  <Bot size={13} />
                   {providerLabel(settings.provider)}
                 </div>
-                <div style-id="stylo-130" className="min-w-0 flex-1 truncate text-xs text-gray-500">{currentProviderSettings.model}</div>
-                <button style-id="stylo-131"
-              type="submit"
-              disabled={isSending || !input.trim()}
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3a3a55] text-white disabled:opacity-40">
+                <div className="small-11">{currentProviderSettings.model}</div>
+                <button
+                type="submit"
+                disabled={isSending || !input.trim()}
+                className="card-row-center-5">
                 
-                  {isSending ? <Loader2 style-id="stylo-132" size={16} className="animate-spin" /> : <Send style-id="stylo-133" size={16} />}
+                  {isSending ? <Loader2 size={16} className="loader2-styled" /> : <Send size={16} />}
                 </button>
               </div>
             </div>
@@ -352,45 +352,45 @@ export default function ChatsView({ sync }: ChatsViewProps) {
       }
 
       {activeTab === 'tools' &&
-      <div style-id="stylo-134" className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-          <div style-id="stylo-135" className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3">
-            <div style-id="stylo-136" className="mb-1 flex items-center gap-2 text-white">
-              <Wrench style-id="stylo-137" size={16} />
-              <span style-id="stylo-138" className="font-medium">Mobile Tool Registry</span>
+      <div className="scroll-3">
+          <div className="card">
+            <div className="row-11">
+              <Wrench size={16} />
+              <span className="span-text">Mobile Tool Registry</span>
             </div>
-            <p style-id="stylo-139" className="text-sm text-gray-500">Read tools run immediately. Write tools wait for your confirmation in Chat.</p>
+            <p className="small-7">Read tools run immediately. Write tools wait for your confirmation in Chat.</p>
           </div>
           {toolDefinitions.map((tool) =>
-        <div style-id="stylo-140" key={tool.name} className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3">
-              <div style-id="stylo-141" className="mb-1 flex items-center gap-2">
+        <div key={tool.name} className="card">
+              <div className="row-12">
                 {tool.requiresConfirmation ?
-            <ShieldCheck style-id="stylo-142" size={15} className="text-amber-200" /> :
-            <Eye style-id="stylo-143" size={15} className="text-emerald-200" />}
-                <p style-id="stylo-144" className="font-mono text-sm text-white">{tool.name}</p>
-                <span style-id="stylo-145" className="ml-auto text-[10px] uppercase tracking-wide text-gray-500">
+            <ShieldCheck size={15} className="shieldcheck-tone" /> :
+            <Eye size={15} className="eye-tone" />}
+                <p className="small-12">{tool.name}</p>
+                <span className="caps-2">
                   {tool.requiresConfirmation ? 'confirm' : 'read'}
                 </span>
               </div>
-              <p style-id="stylo-146" className="text-sm text-gray-400">{tool.description}</p>
+              <p className="small-13">{tool.description}</p>
             </div>
         )}
         </div>
       }
 
       {activeTab === 'settings' &&
-      <div style-id="stylo-147" className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-          <div style-id="stylo-148" className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3">
-            <p style-id="stylo-149" className="mb-3 text-sm font-medium text-white">Provider</p>
-            <div style-id="stylo-150" className="grid grid-cols-3 gap-2">
+      <div className="scroll-2">
+          <div className="card">
+            <p className="small-14">Provider</p>
+            <div className="three-col-grid">
               {PROVIDERS.map((provider) =>
-            <button style-id="stylo-151"
-            key={provider}
-            onClick={() => updateProvider(provider)}
-            className={`rounded-xl border px-2 py-2 text-sm ${
-            settings.provider === provider ?
-            'border-cyan-300/40 bg-cyan-300/10 text-white' :
-            'border-[#2a2a45] text-gray-500'}`
-            }>
+            <button
+              key={provider}
+              onClick={() => updateProvider(provider)}
+              className={`small-15 ${
+              settings.provider === provider ?
+              'border-cyan-300/40 bg-cyan-300/10 text-white' :
+              'border-[#2a2a45] text-gray-500'}`
+              }>
               
                   {providerLabel(provider)}
                 </button>
@@ -398,120 +398,120 @@ export default function ChatsView({ sync }: ChatsViewProps) {
             </div>
           </div>
 
-          <div style-id="stylo-152" className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3 space-y-3">
-            <label style-id="stylo-153" className="block space-y-1.5">
-              <span style-id="stylo-154" className="text-xs text-gray-500">Model</span>
-              <select style-id="stylo-155"
-            value={currentProviderSettings.model}
-            onChange={(event) => updateCurrentProvider({ model: event.target.value })}
-            className="zo-input w-full px-3 py-2.5 text-sm outline-none">
+          <div className="card-8">
+            <label className="label-styled">
+              <span className="small-5">Model</span>
+              <select
+              value={currentProviderSettings.model}
+              onChange={(event) => updateCurrentProvider({ model: event.target.value })}
+              className="zo-input small-16">
               
                 {availableModels.map((model) =>
-              <option style-id="stylo-156" key={model} value={model}>{model}</option>
+              <option key={model} value={model}>{model}</option>
               )}
               </select>
             </label>
-            <div style-id="stylo-157" className="flex items-center gap-2">
-              <input style-id="stylo-158"
-            value={customModel}
-            onChange={(event) => setCustomModel(event.target.value)}
-            placeholder="custom model id"
-            className="zo-input min-w-0 flex-1 px-3 py-2 text-sm outline-none" />
+            <div className="row-6">
+              <input
+              value={customModel}
+              onChange={(event) => setCustomModel(event.target.value)}
+              placeholder="custom model id"
+              className="zo-input small-17" />
             
-              <button style-id="stylo-159"
-            onClick={addCustomModel}
-            className="flex items-center gap-1 rounded-xl bg-[#2a2a45] px-3 py-2 text-sm text-white">
+              <button
+              onClick={addCustomModel}
+              className="card-row-small-6">
               
-                <Plus style-id="stylo-160" size={14} />
+                <Plus size={14} />
                 Add
               </button>
             </div>
           </div>
 
-          <div style-id="stylo-161" className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3 space-y-3">
-            <div style-id="stylo-162" className="flex items-center gap-2 text-white">
-              <KeyRound style-id="stylo-163" size={15} />
-              <span style-id="stylo-164" className="text-sm font-medium">{providerLabel(settings.provider)} Key</span>
+          <div className="card-8">
+            <div className="row-13">
+              <KeyRound size={15} />
+              <span className="small-18">{providerLabel(settings.provider)} Key</span>
             </div>
-            <div style-id="stylo-165" className="flex items-center gap-2">
-              <input style-id="stylo-166"
-            type="password"
-            value={apiKeys[settings.provider]}
-            onChange={(event) => updateApiKey(settings.provider, event.target.value)}
-            placeholder={`${settings.provider === 'chatgpt' ? 'OPENAI' : settings.provider === 'gemini' ? 'GEMINI' : 'ANTHROPIC'}_API_KEY`}
-            className="zo-input min-w-0 flex-1 px-3 py-2 text-sm outline-none" />
+            <div className="row-6">
+              <input
+              type="password"
+              value={apiKeys[settings.provider]}
+              onChange={(event) => updateApiKey(settings.provider, event.target.value)}
+              placeholder={`${settings.provider === 'chatgpt' ? 'OPENAI' : settings.provider === 'gemini' ? 'GEMINI' : 'ANTHROPIC'}_API_KEY`}
+              className="zo-input small-17" />
             
-              <button style-id="stylo-167"
-            onClick={persistApiKey}
-            className="flex items-center gap-1 rounded-xl bg-[#2a2a45] px-3 py-2 text-sm text-white">
+              <button
+              onClick={persistApiKey}
+              className="card-row-small-6">
               
-                {savingKey ? <CheckCircle2 style-id="stylo-168" size={14} /> : <Save style-id="stylo-169" size={14} />}
+                {savingKey ? <CheckCircle2 size={14} /> : <Save size={14} />}
                 Save
               </button>
             </div>
-            <p style-id="stylo-170" className="text-xs text-gray-500">Stored locally with the same key names as briizOS.Web.</p>
+            <p className="small-5">Stored locally with the same key names as briizOS.Web.</p>
           </div>
 
-          <div style-id="stylo-171" className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3 space-y-4">
-            <div style-id="stylo-172" className="flex items-center gap-2 text-white">
-              <SlidersHorizontal style-id="stylo-173" size={15} />
-              <span style-id="stylo-174" className="text-sm font-medium">Parameters</span>
+          <div className="card-9">
+            <div className="row-13">
+              <SlidersHorizontal size={15} />
+              <span className="small-18">Parameters</span>
             </div>
-            <label style-id="stylo-175" className="block space-y-1.5">
-              <span style-id="stylo-176" className="text-xs text-gray-500">Temperature {currentProviderSettings.params.temperature.toFixed(2)}</span>
-              <input style-id="stylo-177"
-            type="range"
-            min="0"
-            max="2"
-            step="0.01"
-            value={currentProviderSettings.params.temperature}
-            onChange={(event) => updateCurrentParams({ temperature: Number(event.target.value) })}
-            className="w-full accent-cyan-300" />
+            <label className="label-styled">
+              <span className="small-5">Temperature {currentProviderSettings.params.temperature.toFixed(2)}</span>
+              <input
+              type="range"
+              min="0"
+              max="2"
+              step="0.01"
+              value={currentProviderSettings.params.temperature}
+              onChange={(event) => updateCurrentParams({ temperature: Number(event.target.value) })}
+              className="input-tone" />
             
             </label>
-            <label style-id="stylo-178" className="block space-y-1.5">
-              <span style-id="stylo-179" className="text-xs text-gray-500">Top P {currentProviderSettings.params.top_p.toFixed(2)}</span>
-              <input style-id="stylo-180"
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={currentProviderSettings.params.top_p}
-            onChange={(event) => updateCurrentParams({ top_p: Number(event.target.value) })}
-            className="w-full accent-cyan-300" />
+            <label className="label-styled">
+              <span className="small-5">Top P {currentProviderSettings.params.top_p.toFixed(2)}</span>
+              <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={currentProviderSettings.params.top_p}
+              onChange={(event) => updateCurrentParams({ top_p: Number(event.target.value) })}
+              className="input-tone" />
             
             </label>
-            <label style-id="stylo-181" className="block space-y-1.5">
-              <span style-id="stylo-182" className="text-xs text-gray-500">Max tokens</span>
-              <input style-id="stylo-183"
-            type="number"
-            min="256"
-            step="100"
-            value={currentProviderSettings.params.max_tokens}
-            onChange={(event) => updateCurrentParams({ max_tokens: Number(event.target.value) })}
-            className="zo-input w-full px-3 py-2 text-sm outline-none" />
+            <label className="label-styled">
+              <span className="small-5">Max tokens</span>
+              <input
+              type="number"
+              min="256"
+              step="100"
+              value={currentProviderSettings.params.max_tokens}
+              onChange={(event) => updateCurrentParams({ max_tokens: Number(event.target.value) })}
+              className="zo-input small-19" />
             
             </label>
           </div>
 
-          <div style-id="stylo-184" className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3 space-y-3">
-            <label style-id="stylo-185" className="flex items-center justify-between gap-3">
-              <span style-id="stylo-186" className="text-sm text-white">Tools enabled</span>
-              <button style-id="stylo-187"
-            onClick={() => persistSettings({ ...settings, enableTools: !settings.enableTools })}
-            className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs ${
-            settings.enableTools ? 'bg-emerald-400/15 text-emerald-100' : 'bg-[#2a2a45] text-gray-400'}`
-            }>
+          <div className="card-8">
+            <label className="row-spread-3">
+              <span className="small-20">Tools enabled</span>
+              <button
+              onClick={() => persistSettings({ ...settings, enableTools: !settings.enableTools })}
+              className={`row-small-6 ${
+              settings.enableTools ? 'bg-emerald-400/15 text-emerald-100' : 'bg-[#2a2a45] text-gray-400'}`
+              }>
               
-                {settings.enableTools ? <CheckCircle2 style-id="stylo-188" size={13} /> : <XCircle style-id="stylo-189" size={13} />}
+                {settings.enableTools ? <CheckCircle2 size={13} /> : <XCircle size={13} />}
                 {settings.enableTools ? 'On' : 'Off'}
               </button>
             </label>
-            <textarea style-id="stylo-190"
-          value={currentProviderSettings.prompt}
-          onChange={(event) => updateCurrentProvider({ prompt: event.target.value })}
-          placeholder="Custom system prompt"
-          className="zo-input min-h-[96px] w-full resize-none px-3 py-2.5 text-sm outline-none" />
+            <textarea
+            value={currentProviderSettings.prompt}
+            onChange={(event) => updateCurrentProvider({ prompt: event.target.value })}
+            placeholder="Custom system prompt"
+            className="zo-input small-21" />
           
           </div>
         </div>

@@ -12,7 +12,7 @@
   padding: 4px 1px;
   border-radius: 10px;
 }
-
+.active {background:var(--tab)}
 .mobile-bottom-nav__item svg {
   flex: none;
 }

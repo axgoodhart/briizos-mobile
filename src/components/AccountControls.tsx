@@ -51,70 +51,70 @@ export default function AccountControls({ sync }: AccountControlsProps) {
 
   if (signedIn) {
     return (
-      <section style-id="stylo-17" className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3">
-        <div style-id="stylo-18" className="flex items-center gap-3">
-          <div style-id="stylo-19" className="w-9 h-9 rounded-xl bg-[#2a2a45] flex items-center justify-center">
-            <UserRound style-id="stylo-20" size={17} className="text-cyan-200" />
+      <section className="card">
+        <div className="row-2">
+          <div className="card-row-center">
+            <UserRound size={17} className="userround-tone" />
           </div>
-          <div style-id="stylo-21" className="min-w-0 flex-1">
-            <p style-id="stylo-22" className="text-white text-sm font-medium truncate">{sync.email || 'Signed in'}</p>
-            <p style-id="stylo-23" className="text-gray-500 text-xs truncate">{sync.uid}</p>
+          <div className="div-size">
+            <p className="small">{sync.email || 'Signed in'}</p>
+            <p className="small-2">{sync.uid}</p>
           </div>
-          <button style-id="stylo-24"
-          type="button"
-          onClick={handleSignOut}
-          disabled={busy}
-          className="w-9 h-9 rounded-lg bg-[#2a2a45] flex items-center justify-center text-gray-300 disabled:opacity-50"
-          title="Sign out">
+          <button
+            type="button"
+            onClick={handleSignOut}
+            disabled={busy}
+            className="card-row-center-2"
+            title="Sign out">
             
-            <LogOut style-id="stylo-25" size={16} />
+            <LogOut size={16} />
           </button>
         </div>
-        {message && <p style-id="stylo-26" className="mt-2 text-xs text-red-300">{message}</p>}
+        {message && <p className="small-3">{message}</p>}
       </section>);
 
   }
 
   return (
-    <form style-id="stylo-27" onSubmit={handleSubmit} className="rounded-xl border border-[#2a2a45] bg-[#1e1e35] p-3 space-y-2">
-      <div style-id="stylo-28" className="flex items-center justify-between">
-        <div style-id="stylo-29">
-          <p style-id="stylo-30" className="text-white text-sm font-medium">Account</p>
-          <p style-id="stylo-31" className="text-gray-500 text-xs">Use the same login as Web.</p>
+    <form onSubmit={handleSubmit} className="card-2">
+      <div className="row-spread">
+        <div>
+          <p className="small-4">Account</p>
+          <p className="small-5">Use the same login as Web.</p>
         </div>
-        <button style-id="stylo-32"
-        type="button"
-        onClick={() => setMode(mode === 'sign-in' ? 'sign-up' : 'sign-in')}
-        className="text-xs text-cyan-200 px-2 py-1 rounded-lg bg-[#2a2a45]">
+        <button
+          type="button"
+          onClick={() => setMode(mode === 'sign-in' ? 'sign-up' : 'sign-in')}
+          className="card-small">
           
           {mode === 'sign-in' ? 'Create' : 'Sign in'}
         </button>
       </div>
-      <input style-id="stylo-33"
-      value={email}
-      onChange={(event) => setEmail(event.target.value)}
-      type="email"
-      placeholder="email"
-      autoComplete="email"
-      className="w-full rounded-lg bg-[#000] border border-[#2a2a45] px-3 py-2 text-sm text-white outline-none" />
+      <input
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        type="email"
+        placeholder="email"
+        autoComplete="email"
+        className="card-small-2" />
       
-      <input style-id="stylo-34"
-      value={password}
-      onChange={(event) => setPassword(event.target.value)}
-      type="password"
-      placeholder="password"
-      autoComplete={mode === 'sign-up' ? 'new-password' : 'current-password'}
-      className="w-full rounded-lg bg-[#000] border border-[#2a2a45] px-3 py-2 text-sm text-white outline-none" />
+      <input
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+        type="password"
+        placeholder="password"
+        autoComplete={mode === 'sign-up' ? 'new-password' : 'current-password'}
+        className="card-small-2" />
       
-      <button style-id="stylo-35"
-      type="submit"
-      disabled={busy || !email.trim() || !password}
-      className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#2a2a45] px-3 py-2 text-sm text-white disabled:opacity-50">
+      <button
+        type="submit"
+        disabled={busy || !email.trim() || !password}
+        className="card-row-center-small">
         
-        <LogIn style-id="stylo-36" size={15} />
+        <LogIn size={15} />
         {mode === 'sign-in' ? 'Sign in' : 'Create account'}
       </button>
-      {message && <p style-id="stylo-37" className="text-xs text-red-300">{message}</p>}
+      {message && <p className="small-6">{message}</p>}
     </form>);
 
 }

@@ -465,87 +465,87 @@ export default function FilesView({ sync }: FilesViewProps) {
     const title = `${editor.mode === 'create' ? 'New' : 'Edit'} ${editorLabel(editor.kind)}`;
 
     return (
-      <form style-id="stylo-191" onSubmit={handleEditorSubmit} className="h-full flex flex-col bg-[#000]">
-        <div style-id="stylo-192" className="flex items-center justify-between gap-3 px-4 py-3 border-b border-[#252540]">
-          <button style-id="stylo-193"
-          type="button"
-          onClick={() => setEditor(null)}
-          className="w-9 h-9 rounded-xl bg-[#20203a] flex items-center justify-center text-gray-300"
-          aria-label="Back to files">
+      <form onSubmit={handleEditorSubmit} className="stack-3">
+        <div className="row-spread-4">
+          <button
+            type="button"
+            onClick={() => setEditor(null)}
+            className="card-row-center-6"
+            aria-label="Back to files">
             
-            <ChevronLeft style-id="stylo-194" size={18} />
+            <ChevronLeft size={18} />
           </button>
-          <div style-id="stylo-195" className="min-w-0 flex-1">
-            <p style-id="stylo-196" className="text-white text-sm font-medium truncate">{title}</p>
-            <p style-id="stylo-197" className="text-gray-500 text-xs truncate">{editor.id}</p>
+          <div className="div-size">
+            <p className="small">{title}</p>
+            <p className="small-2">{editor.id}</p>
           </div>
-          <button style-id="stylo-198"
-          type="submit"
-          disabled={isSaving || writesDisabled}
-          className="flex items-center gap-2 rounded-xl bg-[#3a3a55] px-3 py-2 text-sm text-white disabled:opacity-45">
+          <button
+            type="submit"
+            disabled={isSaving || writesDisabled}
+            className="card-row-small-7">
             
-            <Save style-id="stylo-199" size={15} />
+            <Save size={15} />
             Save
           </button>
         </div>
 
         {writeError &&
-        <div style-id="stylo-200" className="mx-4 mt-3 rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-200">
+        <div className="card-small-4">
             {writeError}
           </div>
         }
 
-        <div style-id="stylo-201" className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+        <div className="scroll-2">
           {editor.kind === 'organizer' &&
           <>
-              <label style-id="stylo-202" className="block space-y-1.5">
-                <span style-id="stylo-203" className="text-xs text-gray-500">Title</span>
-                <input style-id="stylo-204"
-              value={editor.form.title}
-              onChange={(event) => updateOrganizerForm({ title: event.target.value })}
-              className="zo-input w-full px-3 py-2.5 text-sm outline-none"
-              placeholder="Note title" />
+              <label className="label-styled">
+                <span className="small-5">Title</span>
+                <input
+                value={editor.form.title}
+                onChange={(event) => updateOrganizerForm({ title: event.target.value })}
+                className="zo-input small-16"
+                placeholder="Note title" />
               
               </label>
-              <label style-id="stylo-205" className="block space-y-1.5">
-                <span style-id="stylo-206" className="text-xs text-gray-500">Body</span>
-                <textarea style-id="stylo-207"
-              value={editor.form.body}
-              onChange={(event) => updateOrganizerForm({ body: event.target.value })}
-              className="zo-input min-h-[150px] w-full resize-none px-3 py-2.5 text-sm outline-none"
-              placeholder="Write the note" />
+              <label className="label-styled">
+                <span className="small-5">Body</span>
+                <textarea
+                value={editor.form.body}
+                onChange={(event) => updateOrganizerForm({ body: event.target.value })}
+                className="zo-input small-22"
+                placeholder="Write the note" />
               
               </label>
-              <div style-id="stylo-208" className="grid grid-cols-2 gap-3">
-                <label style-id="stylo-209" className="block space-y-1.5">
-                  <span style-id="stylo-210" className="text-xs text-gray-500">Status</span>
-                  <select style-id="stylo-211"
-                value={editor.form.status}
-                onChange={(event) => updateOrganizerForm({ status: event.target.value })}
-                className="zo-input w-full px-3 py-2.5 text-sm outline-none">
+              <div className="two-col-grid">
+                <label className="label-styled">
+                  <span className="small-5">Status</span>
+                  <select
+                  value={editor.form.status}
+                  onChange={(event) => updateOrganizerForm({ status: event.target.value })}
+                  className="zo-input small-16">
                   
-                    <option style-id="stylo-212" value="todo">Todo</option>
-                    <option style-id="stylo-213" value="done">Done</option>
-                    <option style-id="stylo-214" value="archived">Archived</option>
+                    <option value="todo">Todo</option>
+                    <option value="done">Done</option>
+                    <option value="archived">Archived</option>
                   </select>
                 </label>
-                <label style-id="stylo-215" className="block space-y-1.5">
-                  <span style-id="stylo-216" className="text-xs text-gray-500">Schedule</span>
-                  <input style-id="stylo-217"
-                type="date"
-                value={editor.form.scheduledDate}
-                onChange={(event) => updateOrganizerForm({ scheduledDate: event.target.value })}
-                className="zo-input w-full px-3 py-2.5 text-sm outline-none" />
+                <label className="label-styled">
+                  <span className="small-5">Schedule</span>
+                  <input
+                  type="date"
+                  value={editor.form.scheduledDate}
+                  onChange={(event) => updateOrganizerForm({ scheduledDate: event.target.value })}
+                  className="zo-input small-16" />
                 
                 </label>
               </div>
-              <label style-id="stylo-218" className="block space-y-1.5">
-                <span style-id="stylo-219" className="text-xs text-gray-500">Tags</span>
-                <input style-id="stylo-220"
-              value={editor.form.tags}
-              onChange={(event) => updateOrganizerForm({ tags: event.target.value })}
-              className="zo-input w-full px-3 py-2.5 text-sm outline-none"
-              placeholder="comma, separated" />
+              <label className="label-styled">
+                <span className="small-5">Tags</span>
+                <input
+                value={editor.form.tags}
+                onChange={(event) => updateOrganizerForm({ tags: event.target.value })}
+                className="zo-input small-16"
+                placeholder="comma, separated" />
               
               </label>
             </>
@@ -553,48 +553,48 @@ export default function FilesView({ sync }: FilesViewProps) {
 
           {editor.kind === 'tasks' &&
           <>
-              <label style-id="stylo-221" className="block space-y-1.5">
-                <span style-id="stylo-222" className="text-xs text-gray-500">Task</span>
-                <input style-id="stylo-223"
-              value={editor.form.title}
-              onChange={(event) => updateTaskForm({ title: event.target.value })}
-              className="zo-input w-full px-3 py-2.5 text-sm outline-none"
-              placeholder="What needs doing?" />
+              <label className="label-styled">
+                <span className="small-5">Task</span>
+                <input
+                value={editor.form.title}
+                onChange={(event) => updateTaskForm({ title: event.target.value })}
+                className="zo-input small-16"
+                placeholder="What needs doing?" />
               
               </label>
-              <div style-id="stylo-224" className="grid grid-cols-2 gap-3">
-                <label style-id="stylo-225" className="block space-y-1.5">
-                  <span style-id="stylo-226" className="text-xs text-gray-500">Status</span>
-                  <select style-id="stylo-227"
-                value={editor.form.status}
-                onChange={(event) => updateTaskForm({ status: event.target.value })}
-                className="zo-input w-full px-3 py-2.5 text-sm outline-none">
+              <div className="two-col-grid">
+                <label className="label-styled">
+                  <span className="small-5">Status</span>
+                  <select
+                  value={editor.form.status}
+                  onChange={(event) => updateTaskForm({ status: event.target.value })}
+                  className="zo-input small-16">
                   
-                    <option style-id="stylo-228" value="pending">Pending</option>
-                    <option style-id="stylo-229" value="completed">Completed</option>
-                    <option style-id="stylo-230" value="archived">Archived</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="archived">Archived</option>
                   </select>
                 </label>
-                <label style-id="stylo-231" className="block space-y-1.5">
-                  <span style-id="stylo-232" className="text-xs text-gray-500">Priority</span>
-                  <select style-id="stylo-233"
-                value={editor.form.priority}
-                onChange={(event) => updateTaskForm({ priority: event.target.value })}
-                className="zo-input w-full px-3 py-2.5 text-sm outline-none">
+                <label className="label-styled">
+                  <span className="small-5">Priority</span>
+                  <select
+                  value={editor.form.priority}
+                  onChange={(event) => updateTaskForm({ priority: event.target.value })}
+                  className="zo-input small-16">
                   
-                    <option style-id="stylo-234" value="low">Low</option>
-                    <option style-id="stylo-235" value="medium">Medium</option>
-                    <option style-id="stylo-236" value="high">High</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
                   </select>
                 </label>
               </div>
-              <label style-id="stylo-237" className="block space-y-1.5">
-                <span style-id="stylo-238" className="text-xs text-gray-500">Due</span>
-                <input style-id="stylo-239"
-              type="date"
-              value={editor.form.dueDate}
-              onChange={(event) => updateTaskForm({ dueDate: event.target.value })}
-              className="zo-input w-full px-3 py-2.5 text-sm outline-none" />
+              <label className="label-styled">
+                <span className="small-5">Due</span>
+                <input
+                type="date"
+                value={editor.form.dueDate}
+                onChange={(event) => updateTaskForm({ dueDate: event.target.value })}
+                className="zo-input small-16" />
               
               </label>
             </>
@@ -602,65 +602,65 @@ export default function FilesView({ sync }: FilesViewProps) {
 
           {editor.kind === 'events' &&
           <>
-              <label style-id="stylo-240" className="block space-y-1.5">
-                <span style-id="stylo-241" className="text-xs text-gray-500">Event</span>
-                <input style-id="stylo-242"
-              value={editor.form.title}
-              onChange={(event) => updateEventForm({ title: event.target.value })}
-              className="zo-input w-full px-3 py-2.5 text-sm outline-none"
-              placeholder="Calendar event" />
+              <label className="label-styled">
+                <span className="small-5">Event</span>
+                <input
+                value={editor.form.title}
+                onChange={(event) => updateEventForm({ title: event.target.value })}
+                className="zo-input small-16"
+                placeholder="Calendar event" />
               
               </label>
-              <label style-id="stylo-243" className="block space-y-1.5">
-                <span style-id="stylo-244" className="text-xs text-gray-500">Body</span>
-                <textarea style-id="stylo-245"
-              value={editor.form.body}
-              onChange={(event) => updateEventForm({ body: event.target.value })}
-              className="zo-input min-h-[90px] w-full resize-none px-3 py-2.5 text-sm outline-none"
-              placeholder="Event notes" />
+              <label className="label-styled">
+                <span className="small-5">Body</span>
+                <textarea
+                value={editor.form.body}
+                onChange={(event) => updateEventForm({ body: event.target.value })}
+                className="zo-input small-23"
+                placeholder="Event notes" />
               
               </label>
-              <div style-id="stylo-246" className="grid grid-cols-2 gap-3">
-                <label style-id="stylo-247" className="block space-y-1.5">
-                  <span style-id="stylo-248" className="text-xs text-gray-500">Date</span>
-                  <input style-id="stylo-249"
-                type="date"
-                value={editor.form.scheduledDate}
-                onChange={(event) => updateEventForm({ scheduledDate: event.target.value })}
-                className="zo-input w-full px-3 py-2.5 text-sm outline-none"
-                required />
+              <div className="two-col-grid">
+                <label className="label-styled">
+                  <span className="small-5">Date</span>
+                  <input
+                  type="date"
+                  value={editor.form.scheduledDate}
+                  onChange={(event) => updateEventForm({ scheduledDate: event.target.value })}
+                  className="zo-input small-16"
+                  required />
                 
                 </label>
-                <label style-id="stylo-250" className="block space-y-1.5">
-                  <span style-id="stylo-251" className="text-xs text-gray-500">Time</span>
-                  <input style-id="stylo-252"
-                type="time"
-                value={editor.form.time}
-                onChange={(event) => updateEventForm({ time: event.target.value, allDay: false })}
-                className="zo-input w-full px-3 py-2.5 text-sm outline-none"
-                disabled={editor.form.allDay} />
+                <label className="label-styled">
+                  <span className="small-5">Time</span>
+                  <input
+                  type="time"
+                  value={editor.form.time}
+                  onChange={(event) => updateEventForm({ time: event.target.value, allDay: false })}
+                  className="zo-input small-16"
+                  disabled={editor.form.allDay} />
                 
                 </label>
               </div>
-              <div style-id="stylo-253" className="grid grid-cols-2 gap-3">
-                <label style-id="stylo-254" className="block space-y-1.5">
-                  <span style-id="stylo-255" className="text-xs text-gray-500">Status</span>
-                  <select style-id="stylo-256"
-                value={editor.form.status}
-                onChange={(event) => updateEventForm({ status: event.target.value })}
-                className="zo-input w-full px-3 py-2.5 text-sm outline-none">
+              <div className="two-col-grid">
+                <label className="label-styled">
+                  <span className="small-5">Status</span>
+                  <select
+                  value={editor.form.status}
+                  onChange={(event) => updateEventForm({ status: event.target.value })}
+                  className="zo-input small-16">
                   
-                    <option style-id="stylo-257" value="todo">Todo</option>
-                    <option style-id="stylo-258" value="done">Done</option>
-                    <option style-id="stylo-259" value="archived">Archived</option>
+                    <option value="todo">Todo</option>
+                    <option value="done">Done</option>
+                    <option value="archived">Archived</option>
                   </select>
                 </label>
-                <label style-id="stylo-260" className="flex items-center gap-2 pt-7 text-sm text-gray-300">
-                  <input style-id="stylo-261"
-                type="checkbox"
-                checked={editor.form.allDay}
-                onChange={(event) => updateEventForm({ allDay: event.target.checked })}
-                className="accent-cyan-300" />
+                <label className="row-small-7">
+                  <input
+                  type="checkbox"
+                  checked={editor.form.allDay}
+                  onChange={(event) => updateEventForm({ allDay: event.target.checked })}
+                  className="input-tone-2" />
                 
                   All day
                 </label>
@@ -669,32 +669,32 @@ export default function FilesView({ sync }: FilesViewProps) {
           }
 
           {editor.mode === 'edit' &&
-          <div style-id="stylo-262" className="grid grid-cols-3 gap-2 pt-2">
-              <button style-id="stylo-263"
-            type="button"
-            onClick={toggleComplete}
-            disabled={isSaving}
-            className="flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-[#20203a] px-2 text-xs text-gray-200 disabled:opacity-45">
+          <div className="three-col-grid-2">
+              <button
+              type="button"
+              onClick={toggleComplete}
+              disabled={isSaving}
+              className="card-row-center-small-4">
               
-                {complete ? <X style-id="stylo-264" size={14} /> : <Check style-id="stylo-265" size={14} />}
+                {complete ? <X size={14} /> : <Check size={14} />}
                 {complete ? 'Reopen' : 'Complete'}
               </button>
-              <button style-id="stylo-266"
-            type="button"
-            onClick={archiveEditor}
-            disabled={isSaving}
-            className="flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-[#20203a] px-2 text-xs text-gray-200 disabled:opacity-45">
+              <button
+              type="button"
+              onClick={archiveEditor}
+              disabled={isSaving}
+              className="card-row-center-small-4">
               
-                <Archive style-id="stylo-267" size={14} />
+                <Archive size={14} />
                 Archive
               </button>
-              <button style-id="stylo-268"
-            type="button"
-            onClick={deleteEditor}
-            disabled={isSaving}
-            className="flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-red-500/15 px-2 text-xs text-red-200 disabled:opacity-45">
+              <button
+              type="button"
+              onClick={deleteEditor}
+              disabled={isSaving}
+              className="card-row-center-small-5">
               
-                <Trash2 style-id="stylo-269" size={14} />
+                <Trash2 size={14} />
                 Delete
               </button>
             </div>
@@ -705,82 +705,82 @@ export default function FilesView({ sync }: FilesViewProps) {
   }
 
   return (
-    <div style-id="stylo-270" className="h-full flex flex-col">
+    <div className="stack-5">
       {/* Header */}
-      <div style-id="stylo-271" className="flex items-center justify-between px-4 py-3">
-        <h2 style-id="stylo-272" className="text-lg font-medium text-white italic">Files</h2>
-        <button style-id="stylo-273"
-        onClick={() => openCreate('organizer')}
-        disabled={writesDisabled}
-        className="zo-btn-icon disabled:opacity-40"
-        title={writesDisabled ? 'Sign in from Menu before creating.' : 'New note'}>
+      <div className="row-spread-5">
+        <h2 className="h2-tone-2">Files</h2>
+        <button
+          onClick={() => openCreate('organizer')}
+          disabled={writesDisabled}
+          className="zo-btn-icon button-styled"
+          title={writesDisabled ? 'Sign in from Menu before creating.' : 'New note'}>
           
-          <Plus style-id="stylo-274" size={17} />
+          <Plus size={17} />
         </button>
       </div>
 
       {/* Toolbar */}
-      <div style-id="stylo-275" className="flex items-center gap-2 px-4 py-2">
-        <div style-id="stylo-276" className="flex-1 flex items-center gap-2 rounded-xl bg-[#1e1e35] border border-[#2a2a45] px-3 py-2">
-          <Search style-id="stylo-277" size={15} className="text-gray-500" />
-          <input style-id="stylo-278"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search synced data"
-          className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder-gray-500 outline-none" />
+      <div className="row-14">
+        <div className="card-row">
+          <Search size={15} className="chevrondown-tone" />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search synced data"
+            className="small-24" />
           
         </div>
-        <button style-id="stylo-279"
-        onClick={() => setSortAsc(!sortAsc)}
-        className="zo-btn-icon"
-        title={sortAsc ? 'Sort Z to A' : 'Sort A to Z'}>
+        <button
+          onClick={() => setSortAsc(!sortAsc)}
+          className="zo-btn-icon"
+          title={sortAsc ? 'Sort Z to A' : 'Sort A to Z'}>
           
-          <ChevronDown style-id="stylo-280" size={16} className={`transition-transform ${sortAsc ? 'rotate-180' : ''}`} />
+          <ChevronDown size={16} className={`chevrondown-styled ${sortAsc ? 'rotate-180' : ''}`} />
         </button>
       </div>
 
-      <div style-id="stylo-281" className="grid grid-cols-3 gap-2 px-4 py-2">
-        <button style-id="stylo-282"
-        onClick={() => openCreate('organizer')}
-        disabled={writesDisabled}
-        className="flex items-center justify-center gap-1.5 rounded-xl border border-[#2a2a45] bg-[#1e1e35] px-2 py-2 text-xs text-gray-200 disabled:opacity-40">
+      <div className="three-col-grid-3">
+        <button
+          onClick={() => openCreate('organizer')}
+          disabled={writesDisabled}
+          className="card-row-center-small-6">
           
-          <FileText style-id="stylo-283" size={14} />
+          <FileText size={14} />
           Note
         </button>
-        <button style-id="stylo-284"
-        onClick={() => openCreate('tasks')}
-        disabled={writesDisabled}
-        className="flex items-center justify-center gap-1.5 rounded-xl border border-[#2a2a45] bg-[#1e1e35] px-2 py-2 text-xs text-gray-200 disabled:opacity-40">
+        <button
+          onClick={() => openCreate('tasks')}
+          disabled={writesDisabled}
+          className="card-row-center-small-6">
           
-          <ListTodo style-id="stylo-285" size={14} />
+          <ListTodo size={14} />
           Task
         </button>
-        <button style-id="stylo-286"
-        onClick={() => openCreate('events')}
-        disabled={writesDisabled}
-        className="flex items-center justify-center gap-1.5 rounded-xl border border-[#2a2a45] bg-[#1e1e35] px-2 py-2 text-xs text-gray-200 disabled:opacity-40">
+        <button
+          onClick={() => openCreate('events')}
+          disabled={writesDisabled}
+          className="card-row-center-small-6">
           
-          <Calendar style-id="stylo-287" size={14} />
+          <Calendar size={14} />
           Event
         </button>
       </div>
 
       {writeError &&
-      <div style-id="stylo-288" className="mx-4 mt-1 rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-200">
+      <div className="card-small-5">
           {writeError}
         </div>
       }
 
       {/* File list */}
-      <div style-id="stylo-289" className="flex-1 px-4 overflow-y-auto">
+      <div className="scroll-4">
         {sync.status === 'signed-out' &&
-        <div style-id="stylo-290" className="mt-10 text-center text-gray-500 text-sm">
+        <div className="small-25">
             Sign in from Menu to load your Web data.
           </div>
         }
         {sync.status !== 'signed-out' && !hasSyncedItems &&
-        <div style-id="stylo-291" className="mt-10 text-center text-gray-500 text-sm">
+        <div className="small-25">
             No synced items yet.
           </div>
         }
@@ -788,37 +788,37 @@ export default function FilesView({ sync }: FilesViewProps) {
           const Icon = section.icon;
           const isExpanded = expanded[section.id];
           return (
-            <div style-id="stylo-292" key={section.id}>
-            <button style-id="stylo-293"
-              onClick={() => setExpanded((prev) => ({ ...prev, [section.id]: !prev[section.id] }))}
-              className="flex items-center gap-3 w-full py-3 text-left">
+            <div key={section.id}>
+            <button
+                onClick={() => setExpanded((prev) => ({ ...prev, [section.id]: !prev[section.id] }))}
+                className="row-15">
                 
-              <span style-id="stylo-294" className="text-gray-500">
-                {isExpanded ? <ChevronDown style-id="stylo-295" size={14} /> : <ChevronRight style-id="stylo-296" size={14} />}
+              <span className="chevrondown-tone">
+                {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
               </span>
-              <Icon style-id="stylo-297" size={18} className="text-gray-400" />
-              <span style-id="stylo-298" className="text-white text-sm">{section.name}</span>
-              <span style-id="stylo-299" className="ml-auto text-xs text-gray-500">{section.children.length}</span>
+              <Icon size={18} className="icon-tone" />
+              <span className="small-20">{section.name}</span>
+              <span className="small-26">{section.children.length}</span>
             </button>
             {isExpanded &&
-              <div style-id="stylo-300" className="ml-6 border-l-2 border-[#2a2a45] pl-3">
+              <div className="div-spacing-4">
                 {section.children.map((child) =>
-                <button style-id="stylo-301"
-                key={child.id}
-                onClick={() => child.editableKind && openExisting(child.editableKind, child.id)}
-                disabled={!child.editableKind}
-                className="flex w-full items-center gap-3 py-2.5 min-w-0 text-left disabled:cursor-default">
+                <button
+                  key={child.id}
+                  onClick={() => child.editableKind && openExisting(child.editableKind, child.id)}
+                  disabled={!child.editableKind}
+                  className="row-16">
                   
-                    <FileText style-id="stylo-302" size={16} className="text-gray-500 shrink-0" />
-                    <div style-id="stylo-303" className="min-w-0 flex-1">
-                      <p style-id="stylo-304" className="text-white text-sm truncate">{child.name}</p>
-                      <p style-id="stylo-305" className="text-gray-500 text-xs truncate">{child.subtitle}</p>
+                    <FileText size={16} className="filetext-tone" />
+                    <div className="div-size">
+                      <p className="small-27">{child.name}</p>
+                      <p className="small-2">{child.subtitle}</p>
                     </div>
-                    {child.editableKind && <ChevronRight style-id="stylo-306" size={14} className="text-gray-600" />}
+                    {child.editableKind && <ChevronRight size={14} className="chevronright-tone" />}
                   </button>
                 )}
                 {!section.children.length &&
-                <p style-id="stylo-307" className="py-2.5 text-xs text-gray-600">Empty</p>
+                <p className="small-28">Empty</p>
                 }
               </div>
               }
@@ -827,14 +827,14 @@ export default function FilesView({ sync }: FilesViewProps) {
       </div>
 
       {/* Floating add button */}
-      <div style-id="stylo-308" className="absolute bottom-20 right-4">
-        <button style-id="stylo-309"
-        onClick={() => openCreate('organizer')}
-        disabled={writesDisabled}
-        className="w-14 h-14 rounded-full bg-[#2a2a45] border border-[#3a3a55] flex items-center justify-center text-white shadow-lg disabled:opacity-40"
-        title={writesDisabled ? 'Sign in from Menu before creating.' : 'New note'}>
+      <div className="floating-2">
+        <button
+          onClick={() => openCreate('organizer')}
+          disabled={writesDisabled}
+          className="card-row-center-7"
+          title={writesDisabled ? 'Sign in from Menu before creating.' : 'New note'}>
           
-          <Plus style-id="stylo-310" size={24} />
+          <Plus size={24} />
         </button>
       </div>
     </div>);

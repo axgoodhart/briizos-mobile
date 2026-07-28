@@ -6,13 +6,13 @@ export default function Home() {
 
   return (
     <>
-      <h1 style-id="stylo-50">Vite + React</h1>
-      <div style-id="stylo-51" className="card">
-        <button style-id="stylo-52" onClick={() => setCount((count) => count + 1)}>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p style-id="stylo-53">
-          Edit <code style-id="stylo-54">src/App.tsx</code> and save to test HMR
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
     </>);
