@@ -1,6 +1,6 @@
 import { FolderOpen, MessageCircle, Clock, Grid3X3, Wand2, Menu, Home, BookOpenText } from 'lucide-react';
-import type { ViewId } from '../App';
-import './BottomNav.css';
+import type { ViewId } from '.App';
+import '../App.css';
 
 interface BottomNavProps {
   active: ViewId;

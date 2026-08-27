@@ -35,7 +35,7 @@ import type {
   JournalTodoItem,
   MobileJournal,
 } from '../features/journals/journalStore'
-import './JournalsView.css'
+import '../App.css'
 
 type EditableFolioType = Exclude<JournalFolioType, 'dashboard'>
 
