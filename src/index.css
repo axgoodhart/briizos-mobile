@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');@font-face {  font-family: "Chillax";  src: local("RubikScribble-Regular"),    url('./assets/fonts/Rubik_Scribble/RubikScribble-Regular.ttf')}
-@tailwind base;@tailwind components;@tailwind utilities;html {max-width: 600px;  justify-self: center;  border: 2px solid darkslategray;  corner-shape: scoop;  border-radius: 10px;  align-self: center;}
+@tailwind base;@tailwind components;@tailwind utilities;html {width: 100%; min-width: 0; max-width: 100%; justify-self: stretch; border: 2px solid darkslategray; box-sizing: border-box; corner-shape: scoop; border-radius: 10px; align-self: stretch;}body,#root {width: 100%; min-width: 0; max-width: 100%; margin: 0;}
 @layer base {  :root {  --theme-brand:deepskyblue;  --background: 0 0% 100%;    --foreground: 0 0% 95%;    --card-foreground: 0 0% 95%;    --tab: linear-gradient(to bottom, rgba(0, 255, 255, 0.195) 50%, transparent 50%),radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%),#1a1a1a;    --popover: 230 16% 14%;    --popover-foreground: 0 0% 95%;    --primary: 250 70% 65%;    --primary-foreground: 0 0% 100%;    --secondary: 230 12% 20%;    --secondary-foreground: 0 0% 95%;    --muted: 230 12% 20%;    --muted-foreground: 230 10% 55%;    --accent: 250 70% 65%;    --accent-foreground: 0 0% 100%;    --destructive: 0 72% 51%;    --destructive-foreground: 0 0% 98%;    --border: 230 12% 22%;    --input: 230 12% 22%;    --ring: 250 70% 65%;    --radius: 0.75rem;    --sidebar-background: 230 18% 11%;    --sidebar-foreground: 0 0% 95%;    --sidebar-primary: 250 70% 65%;    --sidebar-primary-foreground: 0 0% 100%;    --sidebar-accent: 230 12% 20%;    --sidebar-accent-foreground: 0 0% 95%;    --sidebar-border: 230 12% 22%;    --sidebar-ring: 250 70% 65%;    --theme-bg-solid: rgba(0,5,11,0.1);    --theme-font: "Chillax Variable";    --theme-corner-shape: round;    --theme-bg-image: Hideous.png;    --theme-border-radius:8px;    --theme-box-shadow: rgba(0,255,255,.1);  }
 }
 @layer base {  * {    @apply border-border;  }
@@ -58,7 +58,7 @@ select, .zo-input {background:black; outline:.1px solid rgba(47, 79, 79, 0.503) 
 .expand {  max-width:600px;  max-height:30px;  box-shadow: 0 0 10px var(--theme-box-shadow);  border-radius: var(--theme-border-radius);  corner-shape: var(--theme-border-radius);}
 /* used in: src/components/AccountControls.tsx, src/views/SettingsView.tsx */.row-spread {  display: flex;  align-items: center;  justify-content: space-between;}
 /* used in: src/views/AutomationsView.tsx, src/views/SettingsView.tsx */.row-spread-2 {  display: flex;  align-items: center;  justify-content: space-between;  padding-left: 1rem;  padding-right: 1rem;  padding-top: 0.75rem;  padding-bottom: 0.75rem;  border-bottom-width: 1px;  border-color: '';}
-/* used in: src/App.tsx, src/views/SettingsView.tsx */.scroll {  flex: 1 1 0%;  overflow-y: auto;  border-radius: 0px !important;}
+/* used in: src/App.tsx, src/views/SettingsView.tsx */.scroll {  flex: 1 1 0%; width: 100%; min-width: 0; max-width: 100%; overflow-y: auto;  border-radius: 0px !important;}.scroll > * {width: 100%; min-width: 0; max-width: 100%;}
 /* used in: src/views/AutomationsView.tsx, src/views/ChatsView.tsx, src/views/FilesView.tsx, src/views/SpaceView.tsx */.scroll-2 {  flex: 1 1 0%;  overflow-y: auto;  padding-left: 1rem;  padding-right: 1rem;  padding-top: 1rem;  padding-bottom: 1rem;}
 .scroll-2> :not([hidden])~ :not([hidden]) {  margin-top: 1rem;}
 /* used in: src/components/AccountControls.tsx, src/views/FilesView.tsx */.small {  color: #ffffff;  font-size: 0.875rem;  line-height: 1.25rem;  font-weight: 500;  overflow: hidden;}
@@ -71,18 +71,18 @@ select, .zo-input {background:black; outline:.1px solid rgba(47, 79, 79, 0.503) 
 /* used in: src/views/SettingsView.tsx, src/views/SkillsView.tsx */.span-size {  font-size: 1.125rem;  line-height: 1.75rem;}
 /* used in: src/components/BottomNav.tsx, src/views/MenuView.tsx */.span-tone {  color: 10px;}
 /* used in: src/views/AutomationsView.tsx, src/views/HomeView.tsx */.span-tone-4 {  color: #D1D5DB;}
-/* used in: src/views/AutomationsView.tsx, src/views/ChatsView.tsx, src/views/FilesView.tsx, src/views/MenuView.tsx, src/views/SettingsView.tsx, src/views/SkillsView.tsx, src/views/SpaceView.tsx */.stack-3 {  height: 100%;  display: flex;  flex-direction: column;}
+/* used in: src/views/AutomationsView.tsx, src/views/ChatsView.tsx, src/views/FilesView.tsx, src/views/MenuView.tsx, src/views/SettingsView.tsx, src/views/SkillsView.tsx, src/views/SpaceView.tsx */.stack-3 {  width: 100%; min-width: 0; max-width: 100%; height: 100%;  display: flex;  flex-direction: column;}
 /* used in: src/components/AccountControls.tsx, src/views/MenuView.tsx */.userround-tone {  color: #a5f3fc;}
 /* used in: src/views/AutomationsView.tsx, src/views/HomeView.tsx, src/views/SpaceView.tsx */.zap-tone {  color: #A78BFA;}
 /* ───────────────────────────────────────────────   src/App.tsx   ─────────────────────────────────────────────── */body{background:black;}
 #root {  border-radius: 0px !important;  corner-shape:square;}
 .hover-fx {  color: #6B7280;  margin-left: 0.25rem;}
 .hover-fx:hover {  color: #ffffff;}
-.row {  min-height: 100vh;  background: var(--theme-bg-solid);  display: flex;  justify-content: center;  align-items: flex-start;}
+.row {  width: 100%; min-width: 0; max-width: 100%; min-height: 100vh;  background: var(--theme-bg-solid);  display: flex;  justify-content: center;  align-items: flex-start;}
 .row-scroll {  display: flex;  align-items: center;  gap: 0.25rem;  padding-left: 0.5rem;  padding-right: 0.5rem;  padding-top: 0.5rem;  padding-bottom: 0.5rem;  background: var(--theme-bg-solid);  border-bottom-width: 1px;  border-color: '';  overflow-x: auto;  -ms-overflow-style: none;  scrollbar-width: none;}
 .row-scroll::-webkit-scrollbar {  display: none;}
 .row-small {  display: flex;  align-items: center;  gap: 0.5rem;  padding-left: 0.75rem;  padding-right: 0.75rem;  padding-top: 0.375rem;  padding-bottom: 0.375rem;  border-radius: 0.5rem;  font-size: 0.875rem;  line-height: 1.25rem;  white-space: nowrap;  transition-property: all;  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);  transition-duration: 150ms;}
-.stack {  width: 100%;  max-width: 100%;  height: 100dvh;  background: transparent;;  display: flex;  flex-direction: column;  overflow: hidden;  position: relative;}
+.stack {  width: 100%; min-width: 0; max-width: 100%; flex: 1 1 auto; height: 100dvh;  background: transparent;;  display: flex;  flex-direction: column;  overflow: hidden;  position: relative;}
 /* ───────────────────────────────────────────────   src/components/AccountControls.tsx   ─────────────────────────────────────────────── */.card-2 {  border-radius: 0.75rem;  border-width: 1px;  border-color: '';  background: var(--theme-bg-solid);  padding: 0.75rem;}
 .card-2> :not([hidden])~ :not([hidden]) {  margin-top: 0.5rem;}
 .card-row-center {  width: 2.25rem;  height: 2.25rem;  border-radius: 0.75rem;  background: var(--theme-bg-solid);  display: flex;  align-items: center;  justify-content: center;}
@@ -209,7 +209,7 @@ select, .zo-input {background:black; outline:.1px solid rgba(47, 79, 79, 0.503) 
 .small-26 {  margin-left: auto;  font-size: 0.75rem;  line-height: 1rem;  color: #6B7280;}
 .small-27 {  color: #ffffff;  font-size: 0.875rem;  line-height: 1.25rem;  overflow: hidden;}
 .small-28 {  padding-top: 0.625rem;  padding-bottom: 0.625rem;  font-size: 0.75rem;  line-height: 1rem;  color: #4B5563;}
-.stack-5 {  height: 100%;  display: flex;  flex-direction: column;}
+.stack-5 {  width: 100%; min-width: 0; max-width: 100%; height: 100%;  display: flex;  flex-direction: column;}
 .three-col-grid-2 {  display: grid;  grid-template-columns: repeat(3, minmax(0, 1fr));  gap: 0.5rem;  padding-top: 0.5rem;}
 .three-col-grid-3 {  display: grid;  grid-template-columns: repeat(3, minmax(0, 1fr));  gap: 0.5rem;  padding-left: 1rem;  padding-right: 1rem;  padding-top: 0.5rem;  padding-bottom: 0.5rem;}
 .two-col-grid {  display: grid;  grid-template-columns: repeat(2, minmax(0, 1fr));  gap: 0.75rem;}
@@ -223,7 +223,7 @@ select, .zo-input {background:black; outline:.1px solid rgba(47, 79, 79, 0.503) 
 .row-center-small-2 {  display: flex;  align-items: center;  justify-content: center;  gap: 1rem;  color: #6B7280;  font-size: 0.875rem;  line-height: 1.25rem;  margin-bottom: 0.25rem;}
 .small-29 {  width: 100%;  text-align: left;  padding-left: 1rem;  padding-right: 1rem;  padding-top: 0.625rem;  padding-bottom: 0.625rem;  font-size: 0.875rem;  line-height: 1.25rem;  color: #D1D5DB;}
 .small-29:hover {  background: var(--theme-bg-solid);  color: #ffffff;}
-.home-view {  height: 100%;  display: flex;  border-radius: 0 0 0 0 !important;  background:conic-gradient(from 180deg at 50% 100%, #010f0b, #000000, #000312, #01130d, #050b0a);  background-size:cover;flex-direction: column;  position: relative;filter:contrast(1.05);}
+.home-view {  width: 100%; min-width: 0; max-width: 100%; height: 100%;  display: flex;  border-radius: 0 0 0 0 !important;  background:conic-gradient(from 180deg at 50% 100%, #010f0b, #000000, #000312, #01130d, #050b0a);  background-size:cover;flex-direction: column;  position: relative;filter:contrast(1.05);}
 .stack-center {  flex: 1 1 0%;  display: flex;  flex-direction: column;  align-items: center;  justify-content: center;  padding-left: 1rem;  padding-right: 1rem;  margin-top: -5rem;}
 .textarea-tone-2 {  width: 100%;  background: transparent;  color: #ffffff;  font-size: 1.125rem;  line-height: 1.75rem;  resize: none;  outline: 2px solid transparent;  outline-offset: 2px;  min-height: 80px;}
 .textarea-tone-2::placeholder {  color: #6b7280;}

@@ -56,13 +56,29 @@
 
 /* <APP.css>*/
 #root {
-  margin: var(--cc-margin-negative) auto;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 100dvh;
+  margin: 0;
   text-align: center;
 
 }
 
 html {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   background: black;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 100dvh;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -124,11 +140,12 @@ html {
 
 
 html {
-  justify-self: center;
+  justify-self: stretch;
   border: 2px solid darkslategray;
   corner-shape: scoop;
   border-radius: var(--cc-radius-rounded);
-  align-self: center;
+  align-self: stretch;
+  box-sizing: border-box;
 }
 
 @layer base {
@@ -500,8 +517,17 @@ select,
 /* used in: src/App.tsx, src/views/SettingsView.tsx */
 .scroll {
   flex: 1 1 0%;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow-y: auto;
   border-radius: var(--cc-radius-none) !important;
+}
+
+.scroll > * {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* used in: src/views/AutomationsView.tsx, src/views/ChatsView.tsx, src/views/FilesView.tsx, src/views/SpaceView.tsx */
@@ -595,6 +621,9 @@ select,
 
 /* used in: src/views/AutomationsView.tsx, src/views/ChatsView.tsx, src/views/FilesView.tsx, src/views/MenuView.tsx, src/views/SettingsView.tsx, src/views/SkillsView.tsx, src/views/SpaceView.tsx */
 .stack-3 {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -628,6 +657,9 @@ body {}
 }
 
 .row {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -673,7 +705,9 @@ body {}
 
 .stack {
   width: 100%;
+  min-width: 0;
   max-width: 100%;
+  flex: 1 1 auto;
   height: 100dvh;
   background: transparent;
   ;
@@ -1828,6 +1862,9 @@ body {}
 }
 
 .stack-5 {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -1957,6 +1994,9 @@ body {}
 }
 
 .home-view {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   height: 100%;
   display: flex;
   border-radius: var(--cc-radius-none) var(--cc-radius-none) var(--cc-radius-none) var(--cc-radius-none) !important;
