@@ -1,5 +1,5 @@
 import type { ElementType } from 'react';
-import type { ViewId } from '.App';
+import type { ViewId } from '../App';
 import { Home, FolderOpen, MessageCircle, Clock, Grid3X3, Wand2, Settings, ChevronRight, Database, BookOpenText } from 'lucide-react';
 import AccountControls from '../components/AccountControls';
 import type { BriizOSMobileState } from '../types/briizos';
