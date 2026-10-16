@@ -59,7 +59,6 @@ export default function App() {
   const renderView = () => {
     switch (activeView) {
       case 'home':return <HomeView />;
-      case 'journals':return <JournalsView />;
       case 'files':return <FilesView sync={sync} />;
       case 'chats':return <ChatsView sync={sync} />;
       case 'automations':return <AutomationsView />;
@@ -69,6 +68,12 @@ export default function App() {
       default:return <HomeView />;
     }
   };
+
+  // Journals fills the whole screen and has its own bottom bar; its
+  // Settings tab leads back to the other parts of briizOS.
+  if (activeView === 'journals') {
+    return <JournalsView onLeave={(areaId) => switchView(areaId as ViewId)} />;
+  }
 
   return (
     <div className="row">
